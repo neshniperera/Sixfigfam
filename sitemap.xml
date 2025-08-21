@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://6figfam.vercel.app/</loc>  <!-- Your home page -->
+        <lastmod>2025-08-21</lastmod>  <!-- Today's date -->
+        <priority>1.0</priority>
+    </url>
+    <!-- Add more for other pages -->
+    <url>
+        <loc>https://6figfam.vercel.app/about.html</loc>
+        <lastmod>2025-08-21</lastmod>
+        <priority>0.8</priority>
+    </url>
+</urlset>
