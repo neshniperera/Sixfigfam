@@ -1,0 +1,41 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables */
+:root {
+    --primary-color: #522C81;
+    --secondary-color: #D3C2FF;
+    --bg-color: #FFEBF4;
+    --text-dark: #2D1B3D;
+    --text-light: #6B5B73;
+    --white: #FFFFFF;
+    --accent-gradient: linear-gradient(135deg, #522C81 0%, #D3C2FF 100%);
+    --shadow: 0 10px 30px rgba(82, 44, 129, 0.15);
+    --shadow-lg: 0 20px 40px rgba(82, 44, 129, 0.2);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Utility Classes */
+.gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}

@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="owl1.png">
+    <title>6FigFam</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyABnXX7RGTnX_TSmclfmqyfYCNc6DSxQi8",
+  authDomain: "figfam-3c952.firebaseapp.com",
+  projectId: "figfam-3c952",
+  storageBucket: "figfam-3c952.firebasestorage.app",
+  messagingSenderId: "875036927097",
+  appId: "1:875036927097:web:c7ee56d43a3192ec5360a8",
+  measurementId: "G-5M2C4Y71MS"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // Sign Up
+  window.handleSignUp = async (event) => {
+    event.preventDefault();
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      showSuccessMessage(`Welcome, ${name}!`);
+      closeAuthModal();
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  // Sign In
+  window.handleSignIn = async (event) => {
+    event.preventDefault();
+    const email = document.getElementById('signinEmail').value;
+    const password = document.getElementById('signinPassword').value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      showSuccessMessage(`Signed in as ${email}`);
+      closeAuthModal();
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  // Google Sign-In
+  window.handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      showSuccessMessage(`Signed in with Google!`);
+      closeAuthModal();
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  // Sign Out
+  window.handleSignOut = async () => {
+    await signOut(auth);
+    showSuccessMessage("Signed out successfully!");
+  };
+</script>
+
+    
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #522C81;
+            --secondary-color: #D3C2FF;
+            --bg-color: #FFEBF4;
+            --text-dark: #2D1B3D;
+            --text-light: #6B5B73;
+            --white: #FFFFFF;
+            --accent-gradient: linear-gradient(135deg, #522C81 0%, #D3C2FF 100%);
+            --shadow: 0 10px 30px rgba(82, 44, 129, 0.15);
+            --shadow-lg: 0 20px 40px rgba(82, 44, 129, 0.2);
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--bg-color);
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(82, 44, 129, 0.05), rgba(211, 194, 255, 0.05));
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            left: 70%;
+            animation-delay: -10s;
+        }
+
+        .floating-shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 60%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0px) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(211, 194, 255, 0.1);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            flex: 0 0 400px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(82, 44, 129, 0.3));
+            animation: floatImage 6s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+
+        /* Auth Modal Styles */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-container {
+            background: var(--white);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: modalSlideIn 0.5s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .auth-header {
+            background: var(--accent-gradient);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .auth-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .auth-body {
+            padding: 2.5rem;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            background: var(--bg-color);
+            padding: 5px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-light);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .auth-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E5E7EB;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            font-weight: 500;
+        }
+
+        .google-signin-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--white);
+            color: var(--text-dark);
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .google-signin-btn:hover {
+            background: #F9FAFB;
+            border-color: var(--primary-color);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-image {
+                flex: 0 0 300px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .auth-container {
+                width: 95%;
+            }
+
+            .auth-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="logo.png" alt="6FigFam Logo">
+                    <div class="logo-text">6FigFam</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#fix-my-feathers">Fix my Feathers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>6FigFam</h1>
+                    <p>Wise budgeting and keen insights to help your family soar to sixfigure success</p>
+                    <button class="cta-button" onclick="openAuthModal()">Hoo we go!</button>
+                </div>
+                <div class="hero-image">
+                    <img src="owl1.png" alt="6FigFam Owl Mascot">
+                </div>
+            </div>
+        </div>
+    </section>
+    </section> <!-- End of #home hero section -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6FigFam - About & Features</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #522C81;
+            --secondary-color: #D3C2FF;
+            --bg-color: #FFEBF4;
+            --text-dark: #2D1B3D;
+            --text-light: #6B5B73;
+            --white: #FFFFFF;
+            --accent-gradient: linear-gradient(135deg, #522C81 0%, #D3C2FF 100%);
+            --shadow: 0 10px 30px rgba(82, 44, 129, 0.15);
+            --shadow-lg: 0 20px 40px rgba(82, 44, 129, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animations */
+       @keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* About Section Styles */
+        .about-section {
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-color) 0%, rgba(211, 194, 255, 0.3) 50%, rgba(82, 44, 129, 0.1) 100%);
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(82, 44, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(211, 194, 255, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-content h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out forwards;
+        }
+
+        .about-content .subtitle {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out 0.2s forwards;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .about-content p:nth-of-type(2) {
+            animation: slideInUp 1s ease-out 0.4s forwards;
+        }
+
+        .about-content p:nth-of-type(3) {
+            animation: slideInUp 1s ease-out 0.6s forwards;
+        }
+
+        .about-content p:nth-of-type(4) {
+            animation: slideInUp 1s ease-out 0.8s forwards;
+        }
+
+        .about-content p:nth-of-type(5) {
+            animation: slideInUp 1s ease-out 1s forwards;
+        }
+
+        .about-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .gradient-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .final-statement {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out 1s forwards;
+        }
+        .about-content h2 {
+    /* your existing styles */
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+.about-content .subtitle {
+    /* your existing styles */
+    animation: slideInRight 1s ease-out 0.2s forwards;
+}
+
+.about-content p:nth-of-type(2) {
+    animation: slideInLeft 1s ease-out 0.4s forwards;
+}
+
+.about-content p:nth-of-type(3) {
+    animation: slideInRight 1s ease-out 0.6s forwards;
+}
+
+.about-content p:nth-of-type(4) {
+    animation: slideInLeft 1s ease-out 0.8s forwards;
+}
+
+.about-content p:nth-of-type(5) {
+    animation: slideInRight 1s ease-out 1s forwards;
+}
+
+.final-statement {
+    /* your existing styles */
+    animation: slideInLeft 1s ease-out 1.2s forwards;
+}
+
+        /* Features Section Styles */
+        .features-section {
+            background: var(--white);
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(82, 44, 129, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(211, 194, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .features-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 600;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(82, 44, 129, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card:nth-child(1) {
+            animation: slideInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .feature-card:nth-child(2) {
+            animation: slideInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .feature-card:nth-child(3) {
+            animation: slideInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .feature-card:nth-child(4) {
+            animation: slideInUp 0.8s ease-out 0.8s forwards;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-color);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .feature-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--white);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            opacity: 0.05;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: -3s;
+            width: 150px;
+            height: 150px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .about-content {
+                padding: 60px 0;
+            }
+            
+            .features-section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="about" class="about-section">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="container">
+            <div class="about-content">
+                <h2>About 6FigFam</h2>
+                
+                <p class="subtitle">
+                    Where single-income families transform into financial powerhouses
+                </p>
+                
+                <p>
+                    Welcome to <strong>6FigFam</strong> the ultimate budgeting app crafted for single-income families who are ready to make their money work smarter. Whether you're stretching one paycheck or planning for the future, we've got your back.
+                </p>
+                
+                <p>
+                    With the help of <strong>Figgy</strong>, our wise and friendly mascot. you'll get personalized insights, income tax calculations, goal tracking, emergency fund planning, and intuitive analytics to help you stay ahead.
+                </p>
+                
+                <p>
+                    Our mission is simple. Turn your income into a six-figure future</span>. Because financial growth doesn't start with more money. It starts with better planning.
+                </p>
+                
+                <p class="final-statement">
+                    <strong>Let's build your path to six-figure confidence, one smart decision at a time.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="features-header">
+                <h2>Powerful Features</h2>
+                <p>
+                    Discover intelligent tools designed to transform your financial journey with smart budgeting and personalized insights that grow with your family.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Smart Budgeting</h3>
+                    <p>
+                        Create intelligent budgets that adapt to your family's unique needs and spending patterns with AI-powered recommendations and real-time adjustments.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Family-Focused Planning</h3>
+                    <p>
+                        Tailored specifically for single-income families with features that understand your unique challenges and help you maximize every dollar.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4"/>
+                            <path d="M9 21V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v12"/>
+                        </svg>
+                    </div>
+                    <h3>Goal Tracking</h3>
+                    <p>
+                        Set and track financial goals with visual progress indicators, milestone celebrations, and personalized strategies to reach your six-figure dreams.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M12 20V10"/>
+                            <path d="M18 20V4"/>
+                            <path d="M6 20v-4"/>
+                        </svg>
+                    </div>
+                    <h3>Analytics & Insights</h3>
+                    <p>
+                        Get detailed analytics and personalized insights powered by Figgy, helping you make informed decisions and optimize your financial strategy.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix My Feathers - Donation Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Add these to your existing variables */
+        :root {
+            --primary-color: #522c81;
+            --secondary-color: #d3c2ff;
+            --accent-gradient: linear-gradient(135deg, #522c81 0%, #d3c2ff 100%);
+            --bg-color: #fafafa;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Base animations that might be needed */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Fix My Feathers Section Styles */
+      
+
+        .fix-my-feathers-section {
+            position: relative;
+            background: var(--white);
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0;
+        }
+
+        .fix-my-feathers-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(82, 44, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(211, 194, 255, 0.12) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .fix-my-feathers-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fix-my-feathers-content {
+            flex: 1;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .fix-my-feathers-image {
+            flex: 0 0 400px;
+            text-align: center;
+        }
+
+        .fix-my-feathers-image img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(82, 44, 129, 0.3));
+            animation: floatImage 6s ease-in-out infinite;
+        }
+
+        .fix-my-feathers-content h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out forwards;
+        }
+
+        .mascot-quote {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out 0.2s forwards;
+            position: relative;
+        }
+
+        .mascot-quote::before,
+        .mascot-quote::after {
+            content: '"';
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .mascot-container {
+            margin: 3rem 0;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: scaleIn 1s ease-out 0.4s forwards;
+        }
+
+        .mascot-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .mascot-image::before {
+            content: '';
+            font-size: 5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .mascot-image::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .donation-message {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out 0.4s forwards;
+        }
+
+        .donation-message strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .donate-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 18px 40px;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 0.6s forwards;
+        }
+
+        .donate-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .donate-button:hover::before {
+            left: 100%;
+        }
+
+        .donate-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .feather-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .support-message {
+            margin-top: 2rem;
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out 0.8s forwards;
+        }
+
+        .gradient-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        @keyframes floatImage {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+        }
+
+      
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+      
+        @media (max-width: 768px) {
+            .fix-my-feathers-section {
+                padding: 80px 0;
+                min-height: auto;
+            }
+            
+            .fix-my-feathers-container {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 0 20px;
+            }
+            
+            .fix-my-feathers-image {
+                flex: none;
+                order: -1;
+            }
+            
+            .fix-my-feathers-content {
+                text-align: center;
+            }
+            
+            .donation-message {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .donate-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+            
+            .mascot-quote {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Fix My Feathers Section -->
+<section id="fix-my-feathers" class="fix-my-feathers-section">
+    <div class="fix-my-feathers-header">
+    </div>
+         
+    <div class="fix-my-feathers-container">
+        <div class="fix-my-feathers-content">
+            <div class="mascot-quote">
+                Help me stay sharp and shiny!
+            </div>
+                         
+            <p class="donation-message">
+                <strong>This app will always be free to use.</strong> But if you'd like to support our mission, feel free to Fix My Feathers. Any amount helps!
+            </p>
+                         
+            <a href="https://coff.ee/6figfam" target="_blank" class="donate-button">
+                Donate
+            </a>
+                         
+            <div class="support-message">
+                Every contribution helps us keep improving and maintaining this free service for everyone.
+            </div>
+        </div>
+                 
+        <div class="fix-my-feathers-image">
+            <img src="fixmyfeatures.png" alt="Fix My Feathers Mascot">
+        </div>
+    </div>
+</section>
+        <section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-header">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you! Whether you have a question, feedback, or just want to say hi — reach out anytime. Our team is here to help you make budgeting simple and stress-free.</p>
+        </div>
+        
+        <div class="contact-content">
+            <div class="contact-info-section">
+                <h3>Contact Information</h3>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <span class="material-icons">chat</span>
+                        </div>
+                        <div class="contact-details">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/27723437825">+(94) 72 343 7825</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <span class="material-icons">phone</span>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telephone</h4>
+                            <a href="tel:0113031234">+(94) 11 303 1234</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <span class="material-icons">email</span>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <a href="mailto:neshni2000@gmail.com">neshni2000@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-section">
+                <h3>Send us a Message</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="contactName">Name</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="contact-submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="contact-footer">
+            <p><strong>Your thoughts matter. Let's build smarter budgets together!</strong></p>
+        </div>
+    </div>
+<style>
+/* Contact Section Styles */
+.contact-section {
+    padding: 120px 0;
+    background: var(--bg-color);
+    position: relative;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.contact-header h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+}
+
+.contact-header p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.contact-info-section h3,
+.contact-form-section h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.contact-method:hover {
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.contact-details h4 {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.contact-details a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: var(--secondary-color);
+}
+
+.contact-form {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.contact-submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-submit-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.contact-footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.contact-footer p {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+}
+</style>
+    </section>
+</body>
+</style>
+
+<script>
+// Animation and interaction effects
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.feature-card, [style*="slideInUp"]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax effect for floating elements
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.floating-element');
+        
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.5 + (index * 0.1);
+            element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+        });
+    });
+});
+</script>
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+                <h2>Welcome to 6FigFam</h2>
+                <p>Join our community of financial wisdom seekers</p>
+            </div>
+            <div class="auth-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('signin')">Sign In</button>
+                    <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+                </div>
+
+                <!-- Sign In Form -->
+                <div id="signinForm" class="auth-form active">
+                    <form onsubmit="handleSignIn(event)">
+                        <div class="form-group">
+                            <label for="signinEmail">Email</label>
+                            <input type="email" id="signinEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword">Password</label>
+                            <input type="password" id="signinPassword" name="password" required>
+                        </div>
+                        <button type="submit" class="auth-button">Sign In</button>
+                    </form>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <button class="google-signin-btn" onclick="handleGoogleSignIn()">
+                        <svg class="google-icon" viewBox="0 0 24 24">
+                            <path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continue with Google
+                    </button>
+                    
+                    <div class="forgot-password">
+                        <a href="#" onclick="handleForgotPassword()">Forgot your password?</a>
+                    </div>
+                </div>
+
+                <!-- Sign Up Form -->
+                <div id="signupForm" class="auth-form">
+                    <form onsubmit="handleSignUp(event)">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="auth-button">Create Account</button>
+                    </form>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <button class="google-signin-btn" onclick="handleGoogleSignUp()">
+                        <svg class="google-icon" viewBox="0 0 24 24">
+                            <path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+
+        // Initialize Google Sign-In
+        function initializeGoogleSignIn() {
+            window.google.accounts.id.initialize({
+                client_id: '830324941217-pu3jr5sfkdf05du9b9hrbiljjlokcp52.apps.googleusercontent.com',
+                callback: handleGoogleCredentialResponse
+            });
+        }
+
+        // Handle Google Sign-In response
+        function handleGoogleCredentialResponse(response) {
+            // Decode the JWT token
+            const userInfo = parseJwt(response.credential);
+            
+            // Store user information
+            currentUser = {
+                id: userInfo.sub,
+                name: userInfo.name,
+                email: userInfo.email,
+                picture: userInfo.picture
+            };
+            
+            // Close modal and show success message
+            closeAuthModal();
+            showSuccessMessage(`Welcome, ${currentUser.name}! You've successfully signed in.`);
+            
+            // Here you would typically send the token to your backend
+            console.log('User signed in:', currentUser);
+        }
+
+        // Parse JWT token
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        // Modal functions
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            // Remove active class from all tabs and forms
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            // Add active class to selected tab and form
+            event.target.classList.add('active');
+            document.getElementById(tab + 'Form').classList.add('active');
+        }
+
+        // Handle regular sign in
+        function handleSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            
+            // Here you would implement your regular sign-in logic
+            console.log('Sign in attempted with:', { email, password });
+            
+            // For demo purposes, show success message
+            closeAuthModal();
+            showSuccessMessage('Successfully signed in!');
+        }
+
+        // Handle regular sign up
+        function handleSignUp(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Here you would implement your regular sign-up logic
+            console.log('Sign up attempted with:', { name, email, password });
+            
+            // For demo purposes, show success message
+            closeAuthModal();
+            showSuccessMessage('Account created successfully!');
+        }
+
+        // Handle Google Sign In
+        function handleGoogleSignIn() {
+            window.google.accounts.id.prompt();
+        }
+
+        // Handle Google Sign Up (same as sign in for Google)
+        function handleGoogleSignUp() {
+            window.google.accounts.id.prompt();
+        }
+
+        // Handle forgot password
+        function handleForgotPassword() {
+            const email = prompt('Please enter your email address:');
+            if (email) {
+                // Here you would implement password reset logic
+                console.log('Password reset requested for:', email);
+                alert('Password reset instructions have been sent to your email.');
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #10B981;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+                z-index: 3000;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 600;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            successDiv.textContent = message;
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                successDiv.remove();
+            }, 5000);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('authModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAuthModal();
+            }
+        });
+
+        // Initialize Google Sign-In when page loads
+        window.addEventListener('load', function() {
+            if (window.google && window.google.accounts) {
+                initializeGoogleSignIn();
+            } else {
+                // Retry initialization after a delay if Google API isn't loaded yet
+                setTimeout(initializeGoogleSignIn, 1000);
+            }
+        });
+
+        // Add slideInRight animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(300px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        const aboutSection = document.querySelector('.about-section');
+const aboutElements = document.querySelectorAll('.about-content h2, .about-content .subtitle, .about-content p');
+const aboutObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, { threshold: 0.2 });
+aboutElements.forEach(el => {
+    aboutObserver.observe(el);
+}); 
+    </script>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="6FigFam Logo">
+                    <div class="footer-logo-text">6FigFam</div>
+                </div>
+                <p class="footer-description">
+                    Wise budgeting and keen insights to help your family soar to six-figure success.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <span class="material-icons">facebook</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="material-icons">alternate_email</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="material-icons">phone</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Features</h3>
+                <ul class="footer-links">
+                    <li><a href="#smart-budgeting">Smart Budgeting</a></li>
+                    <li><a href="#family-planning">Family Planning</a></li>
+                    <li><a href="#goal-tracking">Goal Tracking</a></li>
+                    <li><a href="#analytics">Analytics & Insights</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Get in Touch</h3>
+                <div class="contact-info">
+                    <a href="https://wa.me/27723437825" class="contact-item">
+                        <span class="material-icons">chat</span>
+                        <span>072 343 7825</span>
+                    </a>
+                    <a href="tel:0113031234" class="contact-item">
+                        <span class="material-icons">phone</span>
+                        <span>011 303 1234</span>
+                    </a>
+                    <a href="mailto:neshni2000@gmail.com" class="contact-item">
+                        <span class="material-icons">email</span>
+                        <span>neshni2000@gmail.com</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 6FigFam. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--text-dark) 100%);
+    color: var(--white);
+    padding: 60px 0 0;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(211, 194, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(211, 194, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-section h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    position: relative;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--secondary-color);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.footer-logo-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.footer-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.social-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(211, 194, 255, 0.3);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.contact-item:hover {
+    color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+.contact-item .material-icons {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        justify-content: center;
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-bottom-links {
+        gap: 1rem;
+    }
+}
+</style>
+</body>
+</html>

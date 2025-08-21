@@ -1,0 +1,112 @@
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 0 80px;
+    position: relative;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    flex: 1;
+    text-align: left;
+    max-width: 600px;
+}
+
+.hero-image {
+    flex: 0 0 400px;
+    text-align: center;
+}.hero-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(82, 44, 129, 0.3));
+    animation: floatImage 6s ease-in-out infinite;
+}
+
+@keyframes floatImage {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+.hero-content h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: slideInDown 1s ease-out;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: slideInUp 1s ease-out 0.3s both;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    animation: slideInUp 1s ease-out 0.6s both;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

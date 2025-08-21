@@ -1,0 +1,10 @@
+@import 'base.css';
+@import 'animations.css';
+@import 'sections/header.css';
+@import 'sections/hero.css';
+@import 'sections/about.css';
+@import 'sections/features.css';
+@import 'sections/feathers.css';
+@import 'sections/contact.css';
+@import 'sections/footer.css';
+@import 'components/auth-modal.css';

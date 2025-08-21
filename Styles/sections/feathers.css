@@ -1,0 +1,235 @@
+/* Fix My Feathers Section Styles */
+.fix-my-feathers-section {
+    position: relative;
+    background: var(--white);
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 0;
+}
+
+.fix-my-feathers-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(82, 44, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(211, 194, 255, 0.12) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.fix-my-feathers-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.fix-my-feathers-content {
+    flex: 1;
+    text-align: left;
+    max-width: 600px;
+}
+
+.fix-my-feathers-image {
+    flex: 0 0 400px;
+    text-align: center;
+}
+
+.fix-my-feathers-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(82, 44, 129, 0.3));
+    animation: floatImage 6s ease-in-out infinite;
+}
+
+.fix-my-feathers-content h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 1s ease-out forwards;
+}
+
+.mascot-quote {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 1s ease-out 0.2s forwards;
+    position: relative;
+}
+
+.mascot-quote::before,
+.mascot-quote::after {
+    content: '"';
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.mascot-container {
+    margin: 3rem 0;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: scaleIn 1s ease-out 0.4s forwards;
+}
+
+.mascot-image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    animation: float 4s ease-in-out infinite;
+}
+
+.mascot-image::before {
+    content: '🦅';
+    font-size: 5rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.mascot-image::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.donation-message {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 1s ease-out 0.4s forwards;
+}
+
+.donation-message strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.donate-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 18px 40px;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 1s ease-out 0.6s forwards;
+}
+
+.donate-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.donate-button:hover::before {
+    left: 100%;
+}
+
+.donate-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.feather-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.support-message {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--text-light);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 1s ease-out 0.8s forwards;
+}
+
+/* Responsive styles for this section */
+@media (max-width: 768px) {
+    .fix-my-feathers-section {
+        padding: 80px 0;
+        min-height: auto;
+    }
+    
+    .fix-my-feathers-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0 20px;
+    }
+    
+    .fix-my-feathers-image {
+        flex: none;
+        order: -1;
+    }
+    
+    .fix-my-feathers-content {
+        text-align: center;
+    }
+    
+    .donation-message {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .donate-button {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+    
+    .mascot-quote {
+        font-size: 1.1rem;
+    }
+}
