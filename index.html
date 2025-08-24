@@ -784,6 +784,31 @@ window.handleGoogleSignIn = async () => {
             }
         });
     </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const calculateBtn = document.getElementById('calculate-btn');
+    const monthlyIncomeInput = document.getElementById('monthly-income');
+    
+    if (calculateBtn) {
+      calculateBtn.addEventListener('click', function() {
+        const monthlyIncome = parseFloat(monthlyIncomeInput.value);
+        if (isNaN(monthlyIncome) || monthlyIncome <= 0) {
+          alert('Please enter a valid monthly income.');
+          return;
+        }
+        
+        // Calculate budget values
+        const needs = (monthlyIncome * 0.5).toFixed(2);
+        const wants = (monthlyIncome * 0.3).toFixed(2);
+        const savings = (monthlyIncome * 0.2).toFixed(2);
+        
+        // Redirect to result page with query parameters
+        window.location.href = `budget-result.html?income=${monthlyIncome}&needs=${needs}&wants=${wants}&savings=${savings}`;
+      });
+    }
+  });
+</script>
 </body>
 </html>
+
 
