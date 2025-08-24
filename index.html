@@ -181,7 +181,86 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
             </div>
         </div>
     </section>
+<section id="packages" class="packages-section">
+    <div class="container">
+        <div class="packages-header">
+            <h2>Unlock More with 6FigFam</h2>
+            <p>Choose the plan that's right for your family's financial journey.</p>
+        </div>
 
+        <div class="packages-grid">
+            <div class="package-card free">
+                <h3>Free Forever</h3>
+                <p>Essential budgeting tools to get you started.</p>
+                <ul class="feature-list">
+                    <li>Basic Budgeting</li>
+                    <li>Expense Tracking</li>
+                    <li>Goal Setting</li>
+                </ul>
+                <button class="package-select-btn">Get Started</button>
+            </div>
+
+            <div class="package-card pro">
+                <h3>6FigFam Pro</h3>
+                <div class="price">
+                    <span class="original-price">Rs. 5000</span>
+                    <span class="discounted-price">Rs. 2500</span>
+                    <div class="timer">
+                        Limited Time Offer! Ends in <span id="pro-timer">23:59:59</span>
+                    </div>
+                </div>
+                <p>Unlock advanced features and personalized insights.</p>
+                <ul class="feature-list">
+                    <li>Everything in Free</li>
+                    <li>AI-Powered Budgeting</li>
+                    <li>Income Tax Calculations</li>
+                    <li>Emergency Fund Planning</li>
+                    <li>Advanced Analytics</li>
+                </ul>
+                <button class="package-select-btn">Get Pro Now</button>
+            </div>
+        </div>
+
+        <div class="feature-comparison">
+            <h3>Feature Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Free</th>
+                        <th>Pro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Smart Budgeting</td>
+                        <td><span class="material-icons">check</span></td>
+                        <td><span class="material-icons">check</span></td>
+                    </tr>
+                    <tr>
+                        <td>AI Recommendations</td>
+                        <td><span class="material-icons">close</span></td>
+                        <td><span class="material-icons">check</span></td>
+                    </tr>
+                    <tr>
+                        <td>Income Tax Calculation</td>
+                        <td><span class="material-icons">close</span></td>
+                        <td><span class="material-icons">check</span></td>
+                    </tr>
+                    <tr>
+                        <td>Emergency Fund Planning</td>
+                        <td><span class="material-icons">close</span></td>
+                        <td><span class="material-icons">check</span></td>
+                    </tr>
+                    <tr>
+                        <td>Advanced Analytics</td>
+                        <td><span class="material-icons">close</span></td>
+                        <td><span class="material-icons">check</span></td>
+                    </tr>                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
     <section id="fix-my-feathers" class="fix-my-feathers-section">
         <div class="fix-my-feathers-container">
             <div class="fix-my-feathers-content">
@@ -669,6 +748,7 @@ window.handleGoogleSignIn = async () => {
     </script>
 </body>
 </html>
+
 
 
 
