@@ -8,224 +8,6 @@
 @import 'sections/contact.css';
 @import 'sections/footer.css';
 @import 'components/auth-modal.css';
-
-/* Import Inter font for features (if not in base.css) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
-/* Define purple shades (expanded for blending) */
-:root {
-    --purple-light: #D3C2FF;
-    --purple-medium: #A78BFA;
-    --purple-dark: #6D28D9;
-    --purple-accent: #8B5CF6;
-    --purple-blend: linear-gradient(to bottom, var(--purple-medium), var(--purple-dark)); /* For calculator */
-}
-
-/* Apply colors to previous sections for reference */
-.hero {
-    background: linear-gradient(to bottom, var(--purple-light), var(--bg-color));
-}
-
-.about-section {
-    background-color: var(--purple-medium);
-}
-
-/* Features Section (color: accent purple) */
-.features-section {
-    padding: 4rem 0;
-    background-color: var(--purple-accent);
-}
-
-.features-section h3 {
-    font-family: 'Quicksand', sans-serif; /* Changed font */
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: var(--white); /* For visibility on purple */
-}
-
-.features-section p {
-    font-family: 'Inter', sans-serif; /* Changed font */
-    font-weight: 400;
-    line-height: 1.6;
-    color: #f0f0f0; /* Light text for dark background */
-}
-
-/* Broken Packages Sub-Sections */
-.free-plan-section {
-    padding: 3rem 0;
-    background-color: var(--purple-light); /* From Hero */
-}
-
-.pro-plan-section {
-    padding: 3rem 0;
-    background-color: var(--purple-medium); /* From About */
-}
-
-.feature-comparison-section {
-    padding: 3rem 0;
-    background-color: var(--purple-dark); /* From Features */
-    color: var(--white); /* Adjust text for dark background */
-}
-
-/* Shared styles for package cards and comparison (adjusted for sub-sections) */
-.package-card {
-    background: var(--white);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    text-align: center;
-    transition: transform 0.3s ease;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.package-card:hover {
-    transform: translateY(-10px);
-}
-
-.package-card h2, .feature-comparison-section h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    color: inherit; /* Inherit from section color */
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1rem;
-}
-
-.feature-list li {
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.feature-list li::before {
-    content: '\e5ca';
-    font-family: 'Material Icons';
-    margin-right: 0.5rem;
-    color: var(--primary-color);
-}
-
-.package-select-btn {
-    background: var(--accent-gradient);
-    color: var(--white);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.package-select-btn:hover {
-    transform: scale(1.05);
-}
-
-.price {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.original-price {
-    text-decoration: line-through;
-    color: var(--text-light);
-}
-
-.discounted-price {
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-left: 0.5rem;
-}
-
-.timer {
-    font-size: 1rem;
-    color: red;
-    margin-top: 0.5rem;
-}
-
-.feature-comparison-section table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-.feature-comparison-section th, .feature-comparison-section td {
-    padding: 1rem;
-    text-align: center;
-    border: 1px solid var(--white); /* Light border for dark background */
-}
-
-.feature-comparison-section th {
-    background: var(--purple-accent);
-    color: var(--white);
-}
-
-.feature-comparison-section .material-icons {
-    font-size: 1.5rem;
-    color: #fff; /* White for visibility */
-}
-
-/* Calculator Section (blended color from previous) */
-.fifty-thirty-twenty-section {
-    padding: 4rem 0;
-    background: var(--purple-blend);
-    color: var(--white);
-}
-
-.fifty-thirty-twenty-section h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    text-align: center;
-}
-
-.fifty-thirty-twenty-section p {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
-
-.calculator-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.calculator-form label {
-    font-size: 1.2rem;
-}
-
-.calculator-form input {
-    padding: 0.75rem;
-    border: 1px solid var(--white);
-    border-radius: 50px;
-    width: 100%;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent for dark bg */
-    color: var(--white);
-}
-
-#calculate-btn {
-    background: var(--accent-gradient);
-    color: var(--white);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-#calculate-btn:hover {
-    transform: scale(1.05);
-}
-
-/* Your existing media queries and other styles remain here */
 @media (max-width: 900px) {
     .hero-container {
         flex-direction: column; /* Stack content vertically */
@@ -375,3 +157,252 @@ header {
         gap: 1rem;
     }
 }
+/* Packages Section Styles */
+.packages-section {
+    padding: 4rem 0;
+    background: var(--bg-color);
+}
+
+.packages-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.packages-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.packages-header p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.package-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+}
+
+.package-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.package-card p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.feature-list li {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-list li::before {
+    content: '\e5ca'; /* Material Icons check */
+    font-family: 'Material Icons';
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.package-select-btn {
+    background: var(--accent-gradient);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.package-select-btn:hover {
+    transform: scale(1.05);
+}
+
+.price {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--text-light);
+}
+
+.discounted-price {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.timer {
+    font-size: 1rem;
+    color: red;
+    margin-top: 0.5rem;
+}
+
+.feature-comparison {
+    margin-top: 3rem;
+}
+
+.feature-comparison h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.feature-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.feature-comparison th, .feature-comparison td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--secondary-color);
+}
+
+.feature-comparison th {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.feature-comparison .material-icons {
+    font-size: 1.5rem;
+}
+
+/* 50/30/20 Calculator Styles */
+.fifty-thirty-twenty-section {
+    padding: 4rem 0;
+    background: var(--bg-color);
+}
+
+.fifty-thirty-twenty-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.fifty-thirty-twenty-header p {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.calculator-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.calculator-form label {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.calculator-form input {
+    padding: 0.75rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+#calculate-btn {
+    background: var(--accent-gradient);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#calculate-btn:hover {
+    transform: scale(1.05);
+}
+
+.calculator-results {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.calculator-results h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 1.5rem;
+}
+
+.budget-amounts p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.download-prompt {
+    margin-top: 2rem;
+}
+
+.download-prompt p {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.qr-code {
+    max-width: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.download-link {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.download-link:hover {
+    background: var(--secondary-color);
+}
+
