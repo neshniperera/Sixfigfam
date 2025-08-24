@@ -8,6 +8,97 @@
 @import 'sections/contact.css';
 @import 'sections/footer.css';
 @import 'components/auth-modal.css';
+@media (max-width: 900px) {
+    .hero-container {
+        flex-direction: column; /* Stack content vertically */
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .hero-image {
+        /* Adjust max-width for image in stacked layout */
+        max-width: 220px;
+        margin: 0 auto; /* Center the image */
+    }
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Default two columns */
+    gap: 2rem;
+}
+@media (max-width: 900px) {
+    .features-grid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+}
+@media (max-width: 992px) { /* Adjust breakpoint as needed */
+    .fix-my-feathers-container {
+        flex-direction: column; /* Stack content vertically */
+        gap: 2rem;
+        align-items: center; /* Center items when stacked */
+    }
+    .fix-my-feathers-image img {
+        max-width: 220px; /* Adjust size for smaller screens */
+        margin: 0 auto;
+    }
+}
+.contact-content {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+.contact-info-section, .contact-form-section {
+    flex: 1; /* Allow sections to grow/shrink */
+    min-width: 280px; /* Minimum width before wrapping */
+}
+@media (max-width: 768px) {
+    .contact-content {
+        flex-direction: column; /* Stack content vertically */
+        gap: 2rem;
+        align-items: stretch; /* Stretch to full width */
+    }
+    .contact-info-section, .contact-form-section {
+        min-width: 100%; /* Take full width when stacked */
+    }
+}.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow sections to wrap */
+    gap: 2rem;
+}
+.footer-section {
+    flex: 1 1 200px; /* Flexible sections, min-width 200px */
+    min-width: 220px; /* Override to ensure a bit more space */
+}
+@media (max-width: 900px) { /* Adjust breakpoint for stacking */
+    .footer-content {
+        flex-direction: column; /* Stack footer sections vertically */
+        gap: 1.5rem;
+        align-items: flex-start; /* Align to the start when stacked */
+    }
+    .footer-section {
+        min-width: 100%; /* Take full width when stacked */
+        max-width: 100%;
+    }
+}
+.auth-container {
+    width: 400px; /* Default width */
+    max-width: 95vw; /* Ensure it doesn't exceed viewport width */
+    padding: 2.5rem 2rem; /* Default padding */
+}
+@media (max-width: 500px) { /* Adjust for smaller screens */
+    .auth-container {
+        width: 98vw; /* Almost full width on small screens */
+        padding: 1rem; /* Reduced padding */
+        border-radius: 0.75rem; /* Slightly smaller border radius */
+    }
+}
+@media (max-width: 600px) {
+    .floating-shape,
+    .floating-element { /* Assuming you have .floating-element in your HTML */
+        display: none;
+    }
+}
 
 /* Adjustments for fixed header padding on smaller screens */
 header {
@@ -66,3 +157,4 @@ header {
         gap: 1rem;
     }
 }
+
