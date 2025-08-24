@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px; /* Base font size */
+}
+@media (max-width: 600px) { /* Adjust for smaller screens */
+    html {
+        font-size: 15px;
+    }
+}
 
 :root {
     --primary-color: #522C81;
@@ -40,4 +48,5 @@ body {
     font-weight: 600;
 
 }
+
 
