@@ -644,4 +644,27 @@ nav {
     .download-section {
         padding: 2rem;
     }
+@media (max-width: 992px) {
+    .onboarding-header h1 { font-size: 2rem; }
+    .step-content {
+        flex-direction: column-reverse; /* Stack content vertically */
+        gap: 2rem;
+    }
+    .download-section {
+        flex-direction: column; /* Stack content vertically */
+        text-align: center;
+        gap: 2rem;
+    }
+    .app-details {
+        justify-content: center; /* Center details when stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    .onboarding-header h1 { font-size: 1.8rem; }
+    .step-text h2 { font-size: 1.5rem; }
+    .download-prompt h3 { font-size: 1.5rem; }
+    .download-section { padding: 1.5rem; }
+    .step-slide { padding: 1rem; /* Reduce padding for steps */ }
+}
 }
