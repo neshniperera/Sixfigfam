@@ -18,12 +18,6 @@
     --shadow-lg: 0 20px 40px rgba(82, 44, 129, 0.2);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg-color);
@@ -46,3 +40,4 @@ body {
     font-weight: 600;
 
 }
+
