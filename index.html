@@ -181,86 +181,123 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
             </div>
         </div>
     </section>
-<section id="packages" class="packages-section">
-    <div class="container">
-        <div class="packages-header">
-            <h2>Unlock More with 6FigFam</h2>
-            <p>Choose the plan that's right for your family's financial journey.</p>
-        </div>
 
-        <div class="packages-grid">
-            <div class="package-card free">
-                <h3>Free Forever</h3>
-                <p>Essential budgeting tools to get you started.</p>
-                <ul class="feature-list">
-                    <li>Basic Budgeting</li>
-                    <li>Expense Tracking</li>
-                    <li>Goal Setting</li>
-                </ul>
-                <button class="package-select-btn">Get Started</button>
+    <!-- Packages Section (corrected and integrated) -->
+    <section id="packages" class="packages-section">
+        <div class="container">
+            <div class="packages-header">
+                <h2>Unlock More with 6FigFam</h2>
+                <p>Choose the plan that's right for your family's financial journey.</p>
             </div>
 
-            <div class="package-card pro">
-                <h3>6FigFam Pro</h3>
-                <div class="price">
-                    <span class="original-price">Rs. 5000</span>
-                    <span class="discounted-price">Rs. 2500</span>
-                    <div class="timer">
-                        Limited Time Offer! Ends in <span id="pro-timer">23:59:59</span>
-                    </div>
+            <div class="packages-grid">
+                <div class="package-card free">
+                    <h3>Free Forever</h3>
+                    <p>Essential budgeting tools to get you started.</p>
+                    <ul class="feature-list">
+                        <li>Basic Budgeting</li>
+                        <li>Expense Tracking</li>
+                        <li>Goal Setting</li>
+                    </ul>
+                    <button class="package-select-btn">Get Started</button>
                 </div>
-                <p>Unlock advanced features and personalized insights.</p>
-                <ul class="feature-list">
-                    <li>Everything in Free</li>
-                    <li>AI-Powered Budgeting</li>
-                    <li>Income Tax Calculations</li>
-                    <li>Emergency Fund Planning</li>
-                    <li>Advanced Analytics</li>
-                </ul>
-                <button class="package-select-btn">Get Pro Now</button>
+
+                <div class="package-card pro">
+                    <h3>6FigFam Pro</h3>
+                    <div class="price">
+                        <span class="original-price">Rs. 5000</span>
+                        <span class="discounted-price">Rs. 2500</span>
+                        <div class="timer">
+                            Limited Time Offer! Ends in <span id="pro-timer">23:59:59</span>
+                        </div>
+                    </div>
+                    <p>Unlock advanced features and personalized insights.</p>
+                    <ul class="feature-list">
+                        <li>Everything in Free</li>
+                        <li>AI-Powered Budgeting</li>
+                        <li>Income Tax Calculations</li>
+                        <li>Emergency Fund Planning</li>
+                        <li>Advanced Analytics</li>
+                    </ul>
+                    <button class="package-select-btn">Get Pro Now</button>
+                </div>
+            </div>
+
+            <div class="feature-comparison">
+                <h3>Feature Comparison</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free</th>
+                            <th>Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Smart Budgeting</td>
+                            <td><span class="material-icons">check</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>AI Recommendations</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>Income Tax Calculation</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Fund Planning</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Analytics</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </section>
 
-        <div class="feature-comparison">
-            <h3>Feature Comparison</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Free</th>
-                        <th>Pro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Smart Budgeting</td>
-                        <td><span class="material-icons">check</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>AI Recommendations</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>Income Tax Calculation</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>Emergency Fund Planning</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>Advanced Analytics</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>                </tbody>
-            </table>
+    <!-- 50/30/20 Budget Calculator Section (newly integrated) -->
+    <section id="fifty-thirty-twenty" class="fifty-thirty-twenty-section">
+        <div class="container">
+            <div class="fifty-thirty-twenty-header">
+                <h2>50/30/20 Budget Calculator</h2>
+                <p>Understand how to allocate your income effectively using the 50/30/20 rule (50% needs, 30% wants, 20% savings/investing).</p>
+            </div>
+
+            <div class="calculator-form">
+                <label for="monthly-income">Monthly Income (Rs.):</label>
+                <input type="number" id="monthly-income" placeholder="Enter your monthly income" required>
+                <button id="calculate-btn">Calculate</button>
+            </div>
+
+            <div id="calculator-results" class="calculator-results" style="display: none;">
+                <h3>Your Budget Breakdown</h3>
+                <div class="chart-container">
+                    <canvas id="budget-chart"></canvas>
+                </div>
+                <div class="budget-amounts">
+                    <p>Needs (50%): <span id="needs-amount"></span></p>
+                    <p>Wants (30%): <span id="wants-amount"></span></p>
+                    <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
+                </div>
+                <div class="download-prompt">
+                    <p>Download the app now to experience this feature and more!</p>
+                    <img src="Images/qrcode.png" alt="QR Code for App Download" class="qr-code">
+                    <a href="your-app-download-link" class="download-link">Download App</a>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
     <section id="fix-my-feathers" class="fix-my-feathers-section">
         <div class="fix-my-feathers-container">
             <div class="fix-my-feathers-content">
@@ -693,7 +730,7 @@ window.handleGoogleSignIn = async () => {
         document.addEventListener('DOMContentLoaded', function() {
             // Intersection Observer for animations
             const observerOptions = {
-                root: null,
+                root: null;
                 rootMargin: '0px',
                 threshold: 0.1
             };
@@ -746,9 +783,87 @@ window.handleGoogleSignIn = async () => {
             document.head.appendChild(style);
         });
     </script>
+
+    <!-- Chart.js for Pie Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom JS for Packages Timer and 50/30/20 Calculator -->
+    <script>
+        // Timer for Pro Package Discount (1-day countdown, resets automatically)
+        function startTimer(duration, display) {
+            var timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration; // Reset to 24 hours
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var oneDay = 24 * 60 * 60; // seconds in 24 hours
+            var display = document.querySelector('#pro-timer');
+            if (display) startTimer(oneDay, display);
+        };
+
+        // 50/30/20 Calculator Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const monthlyIncomeInput = document.getElementById('monthly-income');
+            const calculatorResults = document.getElementById('calculator-results');
+            const needsAmount = document.getElementById('needs-amount');
+            const wantsAmount = document.getElementById('wants-amount');
+            const savingsAmount = document.getElementById('savings-amount');
+            const budgetChartCanvas = document.getElementById('budget-chart').getContext('2d');
+
+            let budgetChart;
+
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', function () {
+                    const monthlyIncome = parseFloat(monthlyIncomeInput.value);
+                    if (isNaN(monthlyIncome) || monthlyIncome <= 0) {
+                        alert('Please enter a valid monthly income.');
+                        return;
+                    }
+
+                    const needs = monthlyIncome * 0.5;
+                    const wants = monthlyIncome * 0.3;
+                    const savings = monthlyIncome * 0.2;
+
+                    needsAmount.textContent = 'Rs. ' + needs.toFixed(2);
+                    wantsAmount.textContent = 'Rs. ' + wants.toFixed(2);
+                    savingsAmount.textContent = 'Rs. ' + savings.toFixed(2);
+
+                    calculatorResults.style.display = 'block';
+
+                    if (budgetChart) budgetChart.destroy();
+
+                    budgetChart = new Chart(budgetChartCanvas, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
+                            datasets: [{
+                                data: [needs, wants, savings],
+                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                            }]
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
