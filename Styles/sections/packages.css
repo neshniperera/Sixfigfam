@@ -1,0 +1,136 @@
+/* Packages Section */
+.packages-section {
+    padding: 60px 0;
+    background: var(--bg-color);
+}
+
+.packages-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.package-card {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.package-card h3 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.package-card p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.feature-list li {
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.package-select-btn {
+    padding: 12px 30px;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.package-select-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.free {
+    border: 2px solid var(--secondary-color);
+}
+
+.pro {
+    border: 2px solid var(--primary-color);
+}
+
+.price {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.original-price {
+    text-decoration: line-through;    color: var(--text-light);
+    margin-right: 10px;
+}
+
+.discounted-price {
+    font-weight: bold;
+}
+
+.timer {
+    font-size: 14px;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+/* Feature Comparison Table */
+.feature-comparison {
+    margin-top: 50px;
+}
+
+.feature-comparison h3 {
+    text-align: center;
+    color: var(--primary-color);    margin-bottom: 20px;
+}
+
+.feature-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: var(--shadow);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.feature-comparison thead {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.feature-comparison th,
+.feature-comparison td {
+    padding: 15px;
+    text-align: center;
+}
+
+.feature-comparison tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.feature-comparison .material-icons {
+    font-size: 24px;
+    color: var(--primary-color);
+}
