@@ -9,3 +9,60 @@
 @import 'sections/footer.css';
 @import 'components/auth-modal.css';
 
+/* Adjustments for fixed header padding on smaller screens */
+header {
+    padding: 1rem 0; /* Your existing padding */
+}
+@media (max-width: 600px) {
+    header {
+        padding: 1rem 0.5rem; /* Slightly less padding on very small screens */
+    }
+}
+
+/* Responsive Navigation */
+.nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--primary-color); /* Your primary color */
+    position: absolute; /* To position it inside the header */
+    top: 16px;
+    right: 18px;
+    z-index: 1201; /* Ensure it's above other elements */
+}
+
+/* Styles for the navigation links themselves */
+.nav-links {
+    display: flex; /* Default for desktop */
+    gap: 2rem; /* Default for desktop */
+    list-style: none; /* Ensure no bullet points */
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide on small screens by default */
+        flex-direction: column; /* Stack links vertically */
+        gap: 1.2rem; /* Space between stacked links */
+        position: absolute;
+        top: 70px; /* Below the header */
+        left: 0;
+        width: 100vw; /* Full width */
+        background: var(--white); /* Background for the dropdown */
+        box-shadow: var(--shadow); /* Shadow for visual separation */
+        padding: 1.2rem 0;
+        z-index: 1100; /* Ensure it's above page content but below header */
+    }
+    .nav-links.active {
+        display: flex; /* Show when 'active' class is added by JS */
+    }
+    .nav-toggle {
+        display: block; /* Show hamburger icon on small screens */
+    }
+    /* Adjust nav container behavior if needed */
+    .nav-container {
+        /* Example: allow more flex-end space if hamburger is on right */
+        gap: 1rem;
+    }
+}
