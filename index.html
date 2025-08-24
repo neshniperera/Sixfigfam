@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="Styles/base.css">
     <link rel="stylesheet" href="Styles/animations.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+document.querySelector('.nav-toggle').addEventListener('click',function(){
+    document.querySelector('.nav-links').classList.toggle('active');
+});
+</script>
 </head>
 <body>
     <div class="animated-bg">
@@ -641,4 +646,5 @@ window.handleGoogleSignIn = async () => {
     </script>
 </body>
 </html>
+
 
