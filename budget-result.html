@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Images/owl1.png">
+    <title>Budget Result - 6FigFam</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styles/main.css">
+    <link rel="stylesheet" href="Styles/base.css">
+    <link rel="stylesheet" href="Styles/animations.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Simple header for consistency -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="Images/logo.png" alt="6FigFam Logo">
+                    <div class="logo-text">6FigFam</div>
+                </div>
+                <a href="index.html">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="budget-result-section">
+        <div class="container">
+            <h2>Your 50/30/20 Budget Result</h2>
+            <div class="chart-container">
+                <canvas id="budget-chart"></canvas>
+            </div>
+            <div class="budget-amounts">
+                <p>Needs (50%): <span id="needs-amount"></span></p>
+                <p>Wants (30%): <span id="wants-amount"></span></p>
+                <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
+            </div>
+            <div class="download-prompt">
+                <p>Download the app now to save this budget and get more features!</p>
+                <img src="Images/qrcode.png" alt="QR Code for App Download" class="qr-code">
+                <a href="your-app-download-link" class="download-btn">Download Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Parse query parameters and render chart
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const needs = urlParams.get('needs') || 0;
+            const wants = urlParams.get('wants') || 0;
+            const savings = urlParams.get('savings') || 0;
+
+            document.getElementById('needs-amount').textContent = 'Rs. ' + needs;
+            document.getElementById('wants-amount').textContent = 'Rs. ' + wants;
+            document.getElementById('savings-amount').textContent = 'Rs. ' + savings;
+
+            const budgetChartCanvas = document.getElementById('budget-chart').getContext('2d');
+            new Chart(budgetChartCanvas, {
+                type: 'pie',
+                data: {
+                    labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
+                    datasets: [{
+                        data: [needs, wants, savings],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>
