@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-/* CSS Variables */
+
 :root {
     --primary-color: #522C81;
     --secondary-color: #D3C2FF;
@@ -16,6 +16,12 @@
     --accent-gradient: linear-gradient(135deg, #522C81 0%, #D3C2FF 100%);
     --shadow: 0 10px 30px rgba(82, 44, 129, 0.15);
     --shadow-lg: 0 20px 40px rgba(82, 44, 129, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -38,4 +44,5 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 600;
+
 }
