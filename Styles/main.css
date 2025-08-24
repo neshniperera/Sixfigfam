@@ -8,6 +8,114 @@
 @import 'sections/contact.css';
 @import 'sections/footer.css';
 @import 'components/auth-modal.css';
+
+/* Import Inter font for features section (if not already in base.css) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Define purple shades (add to root or here; assuming base.css has :root) */
+:root {
+    --purple-light: #D3C2FF; /* Light purple for backgrounds */
+    --purple-medium: #A78BFA; /* Medium for accents */
+    --purple-dark: #6D28D9; /* Dark for headers */
+    --purple-accent: #8B5CF6; /* Accent for buttons */
+}
+
+/* Apply different purple shades to sections */
+.hero {
+    background: linear-gradient(to bottom, var(--purple-light), var(--bg-color)); /* Light purple gradient */
+}
+
+.about-section {
+    background-color: var(--purple-medium); /* Medium purple */
+}
+
+.features-section {
+    background-color: var(--purple-dark); /* Dark purple */
+    color: var(--white); /* Adjust text for visibility */
+}
+
+.packages-section {
+    background-color: var(--purple-accent); /* Accent purple */
+}
+
+.fifty-thirty-twenty-section {
+    background-color: var(--purple-light); /* Light purple */
+}
+
+.fix-my-feathers-section {
+    background-color: var(--purple-medium); /* Medium purple */
+}
+
+.contact-section {
+    background-color: var(--purple-dark); /* Dark purple */
+}
+
+/* Font changes for features section */
+.features-section h3 {
+    font-family: 'Quicksand', sans-serif; /* Changed to Quicksand for lighter feel */
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.features-section p {
+    font-family: 'Inter', sans-serif; /* Changed to Inter for better readability */
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Styles for budget-result.html (consistent with site) */
+.budget-result-section {
+    padding: 4rem 0;
+    background: var(--bg-color);
+    text-align: center;
+}
+
+.budget-result-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+
+.budget-amounts p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: var(--text-dark);
+}
+
+.download-prompt p {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.qr-code {
+    max-width: 150px;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+.download-btn {
+    display: inline-block;
+    background: var(--accent-gradient);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.download-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Your existing media queries and other styles remain below */
 @media (max-width: 900px) {
     .hero-container {
         flex-direction: column; /* Stack content vertically */
@@ -405,4 +513,3 @@ header {
 .download-link:hover {
     background: var(--secondary-color);
 }
-
