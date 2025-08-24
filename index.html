@@ -16,6 +16,29 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
     document.querySelector('.nav-links').classList.toggle('active');
 });
 </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... (your existing JS) ...
+
+        // Add this for the nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            // Optional: Close nav when a link is clicked (for single-page navigation)
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+        }
+    });
+</script>
 </head>
 <body>
     <div class="animated-bg">
@@ -646,5 +669,6 @@ window.handleGoogleSignIn = async () => {
     </script>
 </body>
 </html>
+
 
 
