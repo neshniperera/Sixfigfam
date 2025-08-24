@@ -157,4 +157,252 @@ header {
         gap: 1rem;
     }
 }
+/* Packages Section Styles */
+.packages-section {
+    padding: 4rem 0;
+    background: var(--bg-color);
+}
+
+.packages-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.packages-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.packages-header p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.package-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+}
+
+.package-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.package-card p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.feature-list li {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-list li::before {
+    content: '\e5ca'; /* Material Icons check */
+    font-family: 'Material Icons';
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.package-select-btn {
+    background: var(--accent-gradient);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.package-select-btn:hover {
+    transform: scale(1.05);
+}
+
+.price {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--text-light);
+}
+
+.discounted-price {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.timer {
+    font-size: 1rem;
+    color: red;
+    margin-top: 0.5rem;
+}
+
+.feature-comparison {
+    margin-top: 3rem;
+}
+
+.feature-comparison h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.feature-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.feature-comparison th, .feature-comparison td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--secondary-color);
+}
+
+.feature-comparison th {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.feature-comparison .material-icons {
+    font-size: 1.5rem;
+}
+
+/* 50/30/20 Calculator Styles */
+.fifty-thirty-twenty-section {
+    padding: 4rem 0;
+    background: var(--bg-color);
+}
+
+.fifty-thirty-twenty-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.fifty-thirty-twenty-header p {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.calculator-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.calculator-form label {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.calculator-form input {
+    padding: 0.75rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+#calculate-btn {
+    background: var(--accent-gradient);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#calculate-btn:hover {
+    transform: scale(1.05);
+}
+
+.calculator-results {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.calculator-results h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 1.5rem;
+}
+
+.budget-amounts p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.download-prompt {
+    margin-top: 2rem;
+}
+
+.download-prompt p {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.qr-code {
+    max-width: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.download-link {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.download-link:hover {
+    background: var(--secondary-color);
+}
 
