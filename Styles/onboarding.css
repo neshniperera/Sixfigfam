@@ -380,8 +380,7 @@ nav {
 }
 
 .next-btn,
-.prev-btn,
-.download-btn {
+.prev-btn { /* Removed download-btn from here to style separately */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -418,15 +417,44 @@ nav {
     transform: translateX(-5px);
 }
 
-.download-btn {
-    background: var(--success-color);
+/* Download Button Styles (Step 5 and common large button) */
+.download-btn,
+.download-btn-large {
+    background-color: #8E44AD; /* Purple color for buttons */
     color: var(--white);
+    padding: 15px 30px;
+    border-radius: 25px; /* Adjust as needed for desired roundness */
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: inline-flex; /* Use flex to center icon and text */
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between icon and text */
 }
 
-.download-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
+.download-btn:hover,
+.download-btn-large:hover {
+    background-color: #7D3C98; /* Darker purple on hover */
+    transform: translateY(-2px);
 }
+
+/* Specific styles for the large download button */
+.download-btn-large {
+    padding: 18px 35px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    gap: 10px;
+    min-width: 250px; /* Ensure a consistent size */
+}
+
 
 /* Download Section */
 .download-section {
@@ -478,28 +506,24 @@ nav {
     font-size: 1.1rem;
 }
 
-.download-btn-large {
+/* New container for QR and Download Button in the final section */
+.download-qr-button-container {
     display: flex;
+    flex-direction: column; /* Default to column for mobile first */
     align-items: center;
-    gap: 15px;
-    padding: 15px 30px;
-    background: var(--success-color);
-    color: var(--white);
-    border: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Quicksand', sans-serif;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--shadow);
+    gap: 20px; /* Space between QR and button */
+    margin-top: 30px; /* Space from prompt text */
+    margin-bottom: 1.5rem; /* Space below this container */
 }
 
-.download-btn-large:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+/* Styling for the QR code image */
+.download-qr-code {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 8px; /* Optional: slight rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: subtle shadow */
 }
+
 
 .app-details {
     display: flex;
@@ -554,96 +578,76 @@ nav {
 /* Download Message */
 .download-message {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--white);
+    bottom: 20px; /* Adjusted position for a "toast" message */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--success-color); /* Green for success */
+    color: var(--white);
+    padding: 15px 25px;
     border-radius: 10px;
-    box-shadow: var(--shadow-lg);
-    padding: 0;
-    z-index: 2000;
-    overflow: hidden;
-    animation: slideInRight 0.5s ease-out;
-    transition: opacity 0.5s ease;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+    z-index: 3000;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideInUp 0.5s ease-out forwards; /* Changed animation */
+    /* Remove 'transition: opacity 0.5s ease;' as fade-out will handle */
 }
 
 .download-message-content {
     display: flex;
     align-items: center;
-    padding: 20px;
+    /* padding: 20px; Removed padding as it's now on .download-message */
     gap: 15px;
 }
 
 .download-message .material-icons {
-    color: var(--success-color);
+    color: var(--white); /* Changed icon color to white for better contrast */
     font-size: 2rem;
 }
 
 .download-message-text h4 {
     font-weight: 700;
-    margin-bottom: 5px;
+    margin: 0; /* Changed from margin-bottom: 5px; */
+    font-size: 1.1em;
 }
 
 .download-message-text p {
-    color: var(--text-light);
+    color: var(--white); /* Changed color to white */
     font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0; /* Changed from margin-bottom: 0; */
 }
 
-@keyframes slideInRight {
+/* Animations for download message */
+@keyframes slideInUp {
     from {
         opacity: 0;
-        transform: translateX(300px);
+        transform: translateX(-50%) translateY(50px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(-50%) translateY(0);
     }
 }
 
-.fade-out {
-    opacity: 0;
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(50px);
+    }
 }
+
+/* Old slideInRight removed as it's not used for this message */
+
 
 /* Responsive Styles */
-@media (max-width: 992px) {
-    .step-content {
-        flex-direction: column-reverse;
-        gap: 2rem;
-    }
-    
-    .step-image {
-        text-align: center;
-    }
-    
-    .download-section {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .app-details {
-        justify-content: center;
-    }
-    
-    .onboarding-header h1 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .onboarding-header h1 {
-        font-size: 1.8rem;
-    }
-    
-    .step-text h2 {
-        font-size: 1.5rem;
-    }
-    
-    .download-prompt h3 {
-        font-size: 1.5rem;
-    }
-    
-    .download-section {
-        padding: 2rem;
-    }
 @media (max-width: 992px) {
     .onboarding-header h1 { font-size: 2rem; }
     .step-content {
@@ -666,5 +670,12 @@ nav {
     .download-prompt h3 { font-size: 1.5rem; }
     .download-section { padding: 1.5rem; }
     .step-slide { padding: 1rem; /* Reduce padding for steps */ }
-}
+
+    /* Responsive adjustments for QR and button layout */
+    .download-qr-button-container {
+        flex-direction: column; /* Ensure column stack on small screens */
+    }
+    .download-qr-code {
+        width: 150px; /* Still a decent size on mobile */
+    }
 }
