@@ -12,56 +12,48 @@
     <link rel="stylesheet" href="Styles/animations.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Owl Image Styling for Budget Result Page */
-        .budget-owl-image {
-            float: right; /* Position owl to the right, similar to homepage */
-            margin-left: 30px; /* Space between owl and content */
-            margin-bottom: 20px; /* Space below owl if content wraps */
-            width: 200px; /* Adjust size as needed for balance */
-            z-index: 1; /* Ensure it's above background */
+        /* Fix for header overlap issue */
+        .budget-result-section {
+            padding-top: 80px; /* Add top padding to prevent header overlap */
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Wrapper to manage layout of owl and budget details */
-        .budget-content-wrapper {
-            display: flex; /* Use flexbox for layout */
-            align-items: flex-start; /* Align items to the top */
-            gap: 30px; /* Space between owl and details */
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            margin-bottom: 30px; /* Space below the content block */
+        /* Budget title styling with Orbitron font */
+        .budget-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #7D3C98;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
-        .budget-details {
-            flex: 1; /* Allow details to take remaining space */
-            min-width: 300px; /* Minimum width before wrapping */
-            position: relative; /* Needed for z-index */
-            z-index: 2; /* Ensure content is above the owl if it overlaps */
-        }
-
-        /* Styling for the new heading */
-        .budget-details h3 {
-            font-family: 'Quicksand', sans-serif;
-            color: #7D3C98; /* Darker purple for contrast, matching theme */
-            text-align: center; /* Center aligned */
-            margin-bottom: 20px;
-            font-size: 1.8em; /* Larger font size for emphasis */
-            line-height: 1.2;
+        /* Center chart container */
+        .chart-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
         }
 
         /* Styling for the budget amounts box */
         .budget-amounts {
-            background-color: #E0B0FF; /* Light purple shade (similar to 'Plum' from your image) */
+            background-color: #E0B0FF;
             padding: 25px;
-            border-radius: 15px; /* Rounded corners for a softer look */
-            margin-bottom: 30px;
-            color: #6F4685; /* Darker purple text for readability */
+            border-radius: 15px;
+            margin: 0 auto 30px;
+            color: #6F4685;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
         }
 
         .budget-amounts p {
             margin: 10px 0;
             font-size: 1.1em;
             line-height: 1.5;
+            font-family: 'Quicksand', sans-serif;
         }
 
         .budget-amounts span {
@@ -70,92 +62,82 @@
 
         /* Styling for the download button to match homepage style */
         .download-btn {
-            display: inline-block; /* Allows setting padding and width */
-            background-color: #8E44AD; /* Deep purple (similar to 'Affair' and homepage button) */
-            color: white !important; /* Ensure text color is white */
+            display: inline-block;
+            background-color: #8E44AD;
+            color: white !important;
             padding: 15px 30px;
-            border-radius: 25px; /* Very rounded corners, like the homepage button */
-            font-family: 'Quicksand', sans-serif; /* Use Quicksand font */
-            font-weight: 700; /* Bold font */
-            text-decoration: none; /* Remove underline */
-            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
-            border: none; /* Remove default border */
-            cursor: pointer; /* Indicate it's clickable */
+            border-radius: 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
             font-size: 1.1em;
-            text-align: center; /* Center text inside button */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add slight shadow for depth */
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .download-btn:hover {
-            background-color: #7D3C98; /* Darker purple on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
+            background-color: #7D3C98;
+            transform: translateY(-2px);
         }
 
-        /* General container styling for content */
+        /* Download prompt styling */
+        .download-prompt {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .download-prompt p {
+            font-family: 'Quicksand', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .qr-code {
+            margin: 15px auto;
+            display: block;
+            max-width: 120px;
+        }
+
+        /* General container styling */
         .container {
-            max-width: 1100px; /* Set a max width for content */
-            margin: 0 auto; /* Center the container */
-            padding: 0 20px; /* Add padding on the sides */
-        }
-
-        /* Section styling for better spacing */
-        .budget-result-section {
-            position: relative; /* Needed for absolute positioning of owl */
-            padding: 40px 0; /* Add vertical padding, 0 on sides as container handles padding */
-            overflow: hidden; /* Hide anything that might overflow */
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .budget-content-wrapper {
-                flex-direction: column; /* Stack owl and details on smaller screens */
-                align-items: center; /* Center items when stacked */
+        @media (max-width: 768px) {
+            .budget-title {
+                font-size: 1.8em;
             }
-            .budget-owl-image {
-                float: none; /* Remove float */
-                margin-right: 0;
-                margin-bottom: 30px; /* Space below owl */
-                width: 180px; /* Adjust size */
-            }
-            .budget-details {
-                width: 100%; /* Take full width */
-                text-align: center; /* Center align details */
-            }
-            .budget-details h3 {
-                text-align: center;
+            .chart-container {
+                width: 250px;
+                height: 250px;
             }
             .budget-amounts {
-                text-align: center; /* Ensure amounts are centered */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .download-prompt {
-                text-align: center; /* Center prompt elements */
-            }
-            .qr-code {
-                display: block; /* Make QR code a block element */
-                margin: 15px auto; /* Center QR code */
-            }
-            .download-btn {
-                display: block; /* Make button a block element */
-                width: fit-content; /* Fit content width */
-                margin: 15px auto; /* Center button */
+                padding: 20px;
             }
             .budget-amounts p {
                 font-size: 1em;
             }
+            .download-btn {
+                display: block;
+                width: fit-content;
+                margin: 15px auto;
+            }
         }
 
         @media (max-width: 480px) {
-            .budget-owl-image {
-                width: 150px; /* Even smaller for very small screens */
+            .budget-title {
+                font-size: 1.5em;
             }
-            .budget-details h3 {
-                font-size: 1.5em; /* Smaller heading on small screens */
+            .chart-container {
+                width: 200px;
+                height: 200px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -181,29 +163,19 @@
 
     <section class="budget-result-section">
         <div class="container">
-            <h2>Your 50/30/20 Budget Result</h2>
+            <!-- Main heading with Orbitron font -->
+            <h2 class="budget-title">Your Budget Plan</h2>
             
-            <!-- New structure for owl, heading, and budget details -->
-            <div class="budget-content-wrapper">
-                <!-- Owl image (owl2.png) placed to the right -->
-                <img src="Images/owl2.png" alt="Budget Result Owl" class="budget-owl-image">
-                
-                <!-- Container for heading, chart, and amounts -->
-                <div class="budget-details">
-                    <!-- Heading with Quicksand font -->
-                    <h3>Budget Result Image</h3>
-                    
-                    <div class="chart-container">
-                        <canvas id="budget-chart"></canvas>
-                    </div>
-                    
-                    <!-- Budget amounts displayed in a light purple box -->
-                    <div class="budget-amounts">
-                        <p>Needs (50%): <span id="needs-amount"></span></p>
-                        <p>Wants (30%): <span id="wants-amount"></span></p>
-                        <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
-                    </div>
-                </div>
+            <!-- Chart centered below heading -->
+            <div class="chart-container">
+                <canvas id="budget-chart"></canvas>
+            </div>
+            
+            <!-- Budget amounts displayed in a light purple box -->
+            <div class="budget-amounts">
+                <p>Needs (50%): <span id="needs-amount"></span></p>
+                <p>Wants (30%): <span id="wants-amount"></span></p>
+                <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
             </div>
             
             <!-- Download prompt and button -->
@@ -225,10 +197,8 @@
 
             // Helper function to format currency display nicely
             const formatCurrency = (amount) => {
-                // Assuming currency is Indian Rupees as per previous example 'Rs.'
-                // Using toLocaleString for formatting, defaulting to 'en-IN' for Indian format
                 return 'Rs. ' + parseFloat(amount).toLocaleString('en-IN', {
-                    minimumFractionDigits: 0, // No decimals for this display
+                    minimumFractionDigits: 0,
                     maximumFractionDigits: 0
                 });
             };
@@ -244,14 +214,23 @@
                     labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
                     datasets: [{
                         data: [needs, wants, savings],
-                        // Using selected purple shades from the image provided earlier
                         backgroundColor: ['#B65FCF', '#9867C5', '#6F4685'], // Lilac, Iris, Affair
                         hoverBackgroundColor: ['#B65FCF', '#9867C5', '#6F4685']
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false // Allows chart to fill container width and height more flexibly
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: 'Quicksand'
+                                }
+                            }
+                        }
+                    }
                 }
             });
         });
