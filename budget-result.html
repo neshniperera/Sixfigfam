@@ -83,7 +83,7 @@
             transform: translateY(-2px);
         }
 
-        /* Download prompt styling */
+        /* Download prompt styling - updated for side-by-side layout */
         .download-prompt {
             text-align: center;
             margin-bottom: 40px;
@@ -91,13 +91,30 @@
 
         .download-prompt p {
             font-family: 'Quicksand', sans-serif;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
         }
 
+        /* New flex container for QR and button */
+        .download-flex-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Updated QR code styling - larger size */
         .qr-code {
-            margin: 15px auto;
-            display: block;
-            max-width: 120px;
+            width: 180px; /* Increased size for better scanning */
+            height: auto;
+        }
+
+        /* Flex container for the button to align properly */
+        .button-container {
+            display: flex;
+            align-items: center;
         }
 
         /* General container styling */
@@ -122,10 +139,13 @@
             .budget-amounts p {
                 font-size: 1em;
             }
-            .download-btn {
-                display: block;
-                width: fit-content;
-                margin: 15px auto;
+            /* On smaller screens, stack the QR code and button */
+            .download-flex-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .qr-code {
+                width: 150px; /* Still fairly large on mobile */
             }
         }
 
@@ -178,11 +198,20 @@
                 <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
             </div>
             
-            <!-- Download prompt and button -->
+            <!-- Download prompt with side-by-side QR and button -->
             <div class="download-prompt">
                 <p>Download the app now to save this budget and get more features!</p>
-                <img src="Images/qr-code.png" alt="QR Code for App Download" class="qr-code">
-                <a href="https://drive.google.com/drive/folders/1ZcmeRvWE1DyTlMSTesOx1Wuzmja0_N08?usp=drive_link" class="download-btn" target="_blank">Download Now</a>
+                
+                <!-- New flex container for side-by-side layout -->
+                <div class="download-flex-container">
+                    <!-- Larger QR code -->
+                    <img src="Images/qr-code.png" alt="QR Code for App Download" class="qr-code">
+                    
+                    <!-- Button container for alignment -->
+                    <div class="button-container">
+                        <a href="https://drive.google.com/drive/folders/1ZcmeRvWE1DyTlMSTesOx1Wuzmja0_N08?usp=drive_link" class="download-btn" target="_blank">Download Now</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
