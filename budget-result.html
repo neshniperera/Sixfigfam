@@ -6,177 +6,338 @@
     <link rel="icon" type="image/png" href="Images/owl1.png">
     <title>Budget Result - 6FigFam</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Styles/main.css">
+    <link rel="stylesheet" href="Styles/base.css">
+    <link rel="stylesheet" href="Styles/animations.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            background: #FBEAFF;
-        }
-        .header-space {
-            height: 75px;
-        }
+        /* Header Styles to fix potential cutting issues */
         header {
-            background: #fff;
-            box-shadow: 0 2px 6px rgba(168,70,196,0.05);
-            z-index: 10;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            background-color: #f8f8f8; /* Assuming a light background */
+            padding: 15px 0; /* Add vertical padding */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+            position: sticky; /* Keep header visible while scrolling */
+            top: 0; /* Stick to the top */
+            z-index: 1000; /* Ensure header is above other content */
         }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
+
+        .header .container { /* Target container specifically within header */
+            max-width: 1100px; /* Consistent max width */
+            margin: 0 auto; /* Center the container */
+            padding: 0 20px; /* Horizontal padding */
         }
-        .budget-main-content {
-            margin-top: 90px; /* space for header */
+
+        .header .container nav {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space out logo and nav links */
+            align-items: center; /* Vertically align items */
+        }
+
+        .header .logo {
             display: flex;
-            flex-direction: column;
             align-items: center;
         }
-        .budget-heading-row {
-            display: flex;
-            align-items: flex-end;
-            gap: 35px;
-            justify-content: center;
-            margin-bottom: 0;
-            width: 100%;
+
+        .header .logo img {
+            height: 40px; /* Adjust logo height as needed */
+            margin-right: 10px;
         }
-        .budget-owl-img {
-            height: 180px;
-            width: auto;
-        }
-        @media (max-width: 700px) {
-            .budget-heading-row {
-                flex-direction: column;
-                align-items: center;
-            }
-            .budget-owl-img {
-                height: 120px;
-                margin-bottom: 12px;
-            }
-        }
-        .budget-heading {
-            font-family: 'Quicksand', sans-serif;
-            color: #7D3C98;
+
+        .header .logo-text {
+            font-size: 1.5em;
             font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 16px;
-            letter-spacing: 1px;
-            text-align: left;
-            margin-left: 10px;
-            position: static;
+            color: #7D3C98; /* Purple color for logo text */
         }
-        .chart-container {
-            width: 260px;
-            height: 260px;
-            margin: 0 0 30px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .budget-amounts {
-            margin-top: 18px;
-            background: #E0B0FF;
-            padding: 28px 16px 23px 16px;
-            border-radius: 16px;
-            color: #6F4685;
-            text-align: left;
+
+        .header nav a { /* Styling for "Back to Home" link */
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.13em;
-            width: 410px;
-            box-shadow: 0 7px 20px rgba(110, 53, 172, 0.10);
-            font-weight: 500;
-        }
-        .budget-amounts p {
-            margin: 8px 0;
             font-weight: 600;
-            color: #6F4685;
+            color: #8E44AD; /* Purple link color */
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 20px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth hover effect */
         }
-        .budget-amounts span {
-            font-weight: 700;
-            color: #573479;
+
+        .header nav a:hover {
+            background-color: #E0B0FF; /* Light purple on hover */
         }
-        @media (max-width:500px) {
-            .budget-amounts { width: 96vw; font-size: 1em;}
-            .budget-heading { font-size: 1.4em;}
-            .chart-container{ width:170px;height:170px;}
+
+        /* Responsive adjustments for the header */
+        @media (max-width: 768px) {
+            .header .container nav {
+                flex-wrap: wrap; /* Allow items to wrap */
+                justify-content: center; /* Center items when wrapped */
+            }
+            .header .logo {
+                margin-bottom: 15px; /* Space below logo if it wraps */
+            }
+            .header nav a {
+                width: fit-content; /* Adjust width to content */
+                text-align: center;
+                margin: 0 auto; /* Center the link */
+            }
         }
-        .download-prompt {
-            text-align: center;
-            margin-top: 34px;
+
+        /* --- Budget Result Section Specific Styles --- */
+
+        /* Container for the owl image and the budget details */
+        .budget-layout-container {
+            display: flex; /* Use flexbox for side-by-side layout */
+            align-items: flex-start; /* Align items at the top */
+            gap: 30px; /* Space between owl and details */
+            margin-bottom: 30px; /* Space below this content block */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
         }
-        .download-btn {
-            background: #7D3C98;
-            color: #fff;
+
+        .owl-area {
+            flex-shrink: 0; /* Prevent the owl column from shrinking */
+            width: 250px; /* Fixed width for the owl column */
+        }
+
+        .budget-owl-image {
+            width: 100%; /* Make owl fill its container */
+            display: block; /* Remove extra space below image */
+            max-width: 250px; /* Ensure it doesn't exceed column width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .details-area {
+            flex-grow: 1; /* Allow details to take up the remaining space */
+            min-width: 0; /* Crucial for flex items to shrink correctly */
+        }
+
+        /* Styling for the specific heading next to the owl */
+        .budget-title-area {
+            margin-bottom: 20px; /* Space below the "Your Budget Plan" title */
+        }
+
+        .budget-details h3 { /* This is for the "Your Budget Plan" heading */
             font-family: 'Quicksand', sans-serif;
-            padding: 14px 34px;
-            border-radius: 28px;
-            border: none;
-            font-weight: 700;
-            margin-top: 12px;
-            font-size: 1.13em;
-            box-shadow: 0 2px 7px rgba(125, 60, 152, 0.08);
-            transition: background 0.22s, transform 0.22s;
-            cursor: pointer;
+            color: #7D3C98; /* A deep purple shade */
+            text-align: left; /* Aligned to the left, as per screenshot */
+            font-size: 2em; /* Larger font size for emphasis */
+            line-height: 1.2;
         }
+
+        /* Styling for the light purple box containing budget amounts */
+        .budget-amounts {
+            background-color: #E0B0FF; /* A light, soft purple */
+            padding: 25px;
+            border-radius: 15px; /* Rounded corners */
+            color: #6F4685; /* Darker purple text for readability */
+            text-align: left; /* Align text to the left within the box */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            margin-top: 20px; /* Space between chart and amounts box */
+        }
+
+        .budget-amounts p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .budget-amounts span {
+            font-weight: bold;
+        }
+
+        /* Styling for the download button to match homepage style */
+        .download-btn {
+            display: inline-block;
+            background-color: #8E44AD; /* Deep purple, matching homepage button */
+            color: white !important;
+            padding: 15px 30px;
+            border-radius: 25px; /* Very rounded corners */
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700; /* Bold font */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none; /* Remove default button border */
+            cursor: pointer;
+            font-size: 1.1em;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
         .download-btn:hover {
-            background: #8E44AD;
-            transform: translateY(-2px) scale(1.04);
+            background-color: #7D3C98; /* Darker purple on hover */
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+
+        /* Adjusting the chart container for better aspect ratio and fit */
+        .chart-container {
+            position: relative;
+            height: 300px; /* Fixed height for the chart canvas */
+            width: 100%; /* Take available width */
+        }
+
+        /* Adjustments for the main section title */
+        .budget-result-section h2 {
+            font-family: 'Quicksand', sans-serif;
+            color: #7D3C98; /* Dark purple for the main title */
+            text-align: center; /* Center the main title */
+            margin-bottom: 30px; /* Space below the main title */
+            font-size: 2.5em;
+        }
+
+        /* --- Responsive Adjustments for Budget Section --- */
+        @media (max-width: 992px) {
+            .budget-layout-container {
+                flex-direction: column; /* Stack items vertically */
+                align-items: center; /* Center items when stacked */
+            }
+            .owl-area {
+                width: 200px; /* Slightly smaller owl column */
+                margin-bottom: 20px; /* Space below the owl */
+            }
+            .budget-owl-image {
+                max-width: 200px;
+            }
+            .details-area {
+                width: 100%; /* Take full width */
+                text-align: center; /* Center align text within details */
+            }
+            .budget-details h3 {
+                text-align: center; /* Center the budget plan title */
+            }
+            .budget-amounts {
+                text-align: center; /* Center budget amounts text */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .budget-result-section h2 {
+                font-size: 2em; /* Smaller main heading */
+            }
+            .budget-title-area {
+                margin-bottom: 15px; /* Less margin */
+            }
+            .budget-details h3 {
+                font-size: 1.8em;
+            }
+            .budget-amounts {
+                padding: 20px;
+                margin-top: 15px;
+            }
+            .budget-amounts p {
+                font-size: 1em;
+            }
+            /* Center download prompt elements */
+            .download-prompt {
+                text-align: center;
+            }
+            .qr-code {
+                display: block; /* Make QR code a block element */
+                margin: 15px auto; /* Center QR code */
+            }
+            .download-btn {
+                display: block; /* Make button a block element */
+                width: fit-content; /* Fit content width */
+                margin: 15px auto; /* Center button */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .owl-area {
+                width: 150px; /* Smaller owl column for very small screens */
+            }
+            .budget-owl-image {
+                max-width: 150px;
+            }
+            .budget-result-section h2 {
+                font-size: 1.7em;
+            }
+            .budget-details h3 {
+                font-size: 1.6em;
+            }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div class="animated-bg">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Simple header for consistency -->
     <header>
-        <div class="container" style="height:75px;display:flex;align-items:center;justify-content:space-between;">
-            <nav style="display:flex;align-items:center;width:100%;">
-                <div class="logo" style="display:flex;align-items:center;gap:7px;">
-                    <img src="Images/logo.png" alt="6FigFam Logo" height="38">
-                    <div class="logo-text" style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.37em;color:#7D3C98;">6FigFam</div>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="Images/logo.png" alt="6FigFam Logo">
+                    <div class="logo-text">6FigFam</div>
                 </div>
-                <div style="flex:1"></div>
-                <a href="index.html" style="color:#7D3C98;text-decoration:underline;font-family:'Quicksand',sans-serif;font-weight:600;margin-right:19px;">
-                    Back to Home
-                </a>
+                <a href="index.html">Back to Home</a>
             </nav>
         </div>
     </header>
-    <div class="budget-main-content">
-        <div class="budget-heading-row" style="margin-bottom:8px;">
-            <img src="Images/owl2.png" alt="Budget Owl" class="budget-owl-img" />
-            <span class="budget-heading">Your Budget Plan</span>
+
+    <section class="budget-result-section">
+        <div class="container">
+            <!-- Main Title for the Section -->
+            <h2>Your 50/30/20 Budget Result</h2>
+            
+            <!-- Container for Owl Image and Budget Details -->
+            <div class="budget-layout-container">
+                <!-- Owl Image Area (positioned to the left) -->
+                <div class="owl-area">
+                    <img src="Images/owl2.png" alt="Budget Result Owl" class="budget-owl-image">
+                </div>
+                
+                <!-- Budget Details Area (to the right of the owl) -->
+                <div class="details-area">
+                    <!-- Specific Title for this Budget Plan -->
+                    <div class="budget-title-area">
+                        <h3>Your Budget Plan</h3>
+                    </div>
+                    
+                    <!-- Chart Container -->
+                    <div class="chart-container">
+                        <canvas id="budget-chart"></canvas>
+                    </div>
+                    
+                    <!-- Budget Amounts in a styled box -->
+                    <div class="budget-amounts">
+                        <p>Needs (50%): <span id="needs-amount"></span></p>
+                        <p>Wants (30%): <span id="wants-amount"></span></p>
+                        <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Download Prompt -->
+            <div class="download-prompt">
+                <p>Download the app now to save this budget and get more features!</p>
+                <img src="Images/qrcode.png" alt="QR Code for App Download" class="qr-code">
+                <a href="your-app-download-link" class="download-btn">Download Now</a>
+            </div>
         </div>
-        <div class="chart-container">
-            <canvas id="budget-chart"></canvas>
-        </div>
-        <div class="budget-amounts">
-            <p>Needs (50%): <span id="needs-amount"></span></p>
-            <p>Wants (30%): <span id="wants-amount"></span></p>
-            <p>Savings/Investing (20%): <span id="savings-amount"></span></p>
-        </div>
-        <div class="download-prompt">
-            <p style="font-family:'Quicksand',sans-serif;font-weight:500;">Download the app now to save this budget and get more features!</p>
-            <img src="Images/qrcode.png" alt="QR Code for App Download" class="qr-code" style="margin-top:12px;width:114px;">
-            <br>
-            <a href="your-app-download-link" class="download-btn">Download Now</a>
-        </div>
-    </div>
+    </section>
+
     <script>
-        // Pie chart colors from selected nice purples
-        const BUDGET_COLORS = ['#B65FCF', '#9867C5', '#6F4685'];
         document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
             const needs = urlParams.get('needs') || 0;
             const wants = urlParams.get('wants') || 0;
             const savings = urlParams.get('savings') || 0;
 
-            function formatCurrency(amount) {
-                return 'Rs. ' + parseFloat(amount).toLocaleString('en-IN', {
-                    minimumFractionDigits: 0, maximumFractionDigits: 0
+            // Helper function to format currency nicely, ensuring Indian Rupee format
+            const formatCurrency = (amount) => {
+                // Use parseFloat to handle potential string inputs and then format
+                const numericAmount = parseFloat(amount);
+                if (isNaN(numericAmount)) {
+                    return 'Rs. 0'; // Default to Rs. 0 if parsing fails
+                }
+                // Use toLocaleString for proper number formatting, specifying Indian locale
+                return 'Rs. ' + numericAmount.toLocaleString('en-IN', {
+                    minimumFractionDigits: 0, // No decimal points for this display
+                    maximumFractionDigits: 0
                 });
-            }
+            };
+
             document.getElementById('needs-amount').textContent = formatCurrency(needs);
             document.getElementById('wants-amount').textContent = formatCurrency(wants);
             document.getElementById('savings-amount').textContent = formatCurrency(savings);
@@ -188,19 +349,14 @@
                     labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
                     datasets: [{
                         data: [needs, wants, savings],
-                        backgroundColor: BUDGET_COLORS,
-                        hoverBackgroundColor: BUDGET_COLORS
+                        // Using selected purple shades for consistency with theme
+                        backgroundColor: ['#B65FCF', '#9867C5', '#6F4685'], // Lilac, Iris, Affair
+                        hoverBackgroundColor: ['#B65FCF', '#9867C5', '#6F4685']
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: { font: { family: 'Quicksand', size: 14 } }
-                        }
-                    }
+                    maintainAspectRatio: false // Allows chart to better fill the container height/width
                 }
             });
         });
