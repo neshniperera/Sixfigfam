@@ -274,6 +274,16 @@
                 <label for="monthly-income">Monthly Income (Rs.):</label>
                 <input type="number" id="monthly-income" placeholder="Enter your monthly income" required />
                 <button id="calculate-btn">Calculate</button>
+                <script>
+document.getElementById('calculate-btn').onclick = function() {
+    var income = document.getElementById('monthly-income').value;
+    if (income && !isNaN(income)) {
+        window.location.href = 'budget-result.html?income=' + encodeURIComponent(income);
+    } else {
+        alert('Please enter a valid monthly income!');
+    }
+};
+</script>
             </div>
         </div>
     </section>
@@ -763,3 +773,4 @@
     </script>
 </body>
 </html>
+
