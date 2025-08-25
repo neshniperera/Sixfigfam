@@ -219,30 +219,43 @@
     <script>
         // Parse query parameters and render chart
         document.addEventListener('DOMContentLoaded', function () {
+            // Get the income from the URL query parameter
             const urlParams = new URLSearchParams(window.location.search);
-            const needs = urlParams.get('needs') || 0;
-            const wants = urlParams.get('wants') || 0;
-            const savings = urlParams.get('savings') || 0;
+            const income = parseFloat(urlParams.get('income')) || 0; // Default to 0 if income is not found or invalid
+
+            // Calculate amounts based on the 50/30/20 rule
+            const needs = income * 0.50;
+            const wants = income * 0.30;
+            const savings = income * 0.20;
 
             // Helper function to format currency display nicely
             const formatCurrency = (amount) => {
-                return 'Rs. ' + parseFloat(amount).toLocaleString('en-IN', {
+                // Ensure amount is a number before formatting
+                const numAmount = parseFloat(amount);
+                if (isNaN(numAmount)) return 'Rs. 0'; // Fallback for invalid numbers
+
+                return 'Rs. ' + numAmount.toLocaleString('en-IN', {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0
                 });
             };
 
+            // Update the displayed amounts on the page
             document.getElementById('needs-amount').textContent = formatCurrency(needs);
             document.getElementById('wants-amount').textContent = formatCurrency(wants);
             document.getElementById('savings-amount').textContent = formatCurrency(savings);
 
+            // Prepare data for the Chart.js pie chart
+            const chartData = [needs, wants, savings];
+
+            // Get the canvas context for the chart
             const budgetChartCanvas = document.getElementById('budget-chart').getContext('2d');
             new Chart(budgetChartCanvas, {
                 type: 'pie',
                 data: {
                     labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
                     datasets: [{
-                        data: [needs, wants, savings],
+                        data: chartData, // Use the calculated data
                         backgroundColor: ['#B65FCF', '#9867C5', '#6F4685'], // Lilac, Iris, Affair
                         hoverBackgroundColor: ['#B65FCF', '#9867C5', '#6F4685']
                     }]
@@ -256,6 +269,20 @@
                             labels: {
                                 font: {
                                     family: 'Quicksand'
+                                }
+                            }
+                        },
+                        tooltip: { // Add tooltip for better user experience
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += formatCurrency(context.parsed);
+                                    }
+                                    return label;
                                 }
                             }
                         }
