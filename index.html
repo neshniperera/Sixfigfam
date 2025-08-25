@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="Images/owl1.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="Images/owl1.png" />
     <title>6FigFam</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Styles/main.css">
-    <link rel="stylesheet" href="Styles/base.css">
-    <link rel="stylesheet" href="Styles/animations.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="Styles/main.css" />
+    <link rel="stylesheet" href="Styles/base.css" />
+    <link rel="stylesheet" href="Styles/animations.css" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script>
-document.querySelector('.nav-toggle').addEventListener('click',function(){
-    document.querySelector('.nav-links').classList.toggle('active');
-});
-</script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // ... (your existing JS) ...
 
-        // Add this for the nav toggle
+    <script>
+      // Add nav toggle button functionality once DOM is loaded
+      document.addEventListener('DOMContentLoaded', function () {
         const navToggle = document.querySelector('.nav-toggle');
         const navLinks = document.querySelector('.nav-links');
 
         if (navToggle && navLinks) {
-            navToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
+          navToggle.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+          });
+
+          // Close nav when a link is clicked for single-page nav
+          navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+              }
             });
-            // Optional: Close nav when a link is clicked (for single-page navigation)
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                    }
-                });
-            });
+          });
         }
-    });
-</script>
+      });
+    </script>
 </head>
 <body>
     <div class="animated-bg">
@@ -52,9 +47,12 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="Images/logo.png" alt="6FigFam Logo">
+                    <img src="Images/logo.png" alt="6FigFam Logo" />
                     <div class="logo-text">6FigFam</div>
                 </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="material-icons">menu</span>
+                </button>
                 <div class="nav-container">
                     <ul class="nav-links">
                         <li><a href="#home">Home</a></li>
@@ -78,7 +76,7 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
                     <button class="cta-button" onclick="openAuthModal('signin')">Hoo we go!</button>
                 </div>
                 <div class="hero-image">
-                    <img src="Images/owl1.png" alt="6FigFam Owl Mascot">
+                    <img src="Images/owl1.png" alt="6FigFam Owl Mascot" />
                 </div>
             </div>
         </div>
@@ -101,7 +99,7 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
                 </p>
 
                 <p>
-                    With the help of <strong>Figgy</strong>, our wise and friendly mascot. you'll get personalized insights, income tax calculations, goal tracking, emergency fund planning, and intuitive analytics to help you stay ahead.
+                    With the help of <strong>Figgy</strong>, our wise and friendly mascot, you'll get personalized insights, income tax calculations, goal tracking, emergency fund planning, and intuitive analytics to help you stay ahead.
                 </p>
 
                 <p>
@@ -181,86 +179,88 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
             </div>
         </div>
     </section>
-<section id="packages" class="packages-section">
-    <div class="container">
-        <div class="packages-header">
-            <h2>Unlock More with 6FigFam</h2>
-            <p>Choose the plan that's right for your family's financial journey.</p>
-        </div>
 
-        <div class="packages-grid">
-            <div class="package-card free">
-                <h3>Free Forever</h3>
-                <p>Essential budgeting tools to get you started.</p>
-                <ul class="feature-list">
-                    <li>Basic Budgeting</li>
-                    <li>Expense Tracking</li>
-                    <li>Goal Setting</li>
-                </ul>
-                <button class="package-select-btn">Get Started</button>
+    <section id="packages" class="packages-section">
+        <div class="container">
+            <div class="packages-header">
+                <h2>Unlock More with 6FigFam</h2>
+                <p>Choose the plan that's right for your family's financial journey.</p>
             </div>
 
-            <div class="package-card pro">
-                <h3>6FigFam Pro</h3>
-                <div class="price">
-                    <span class="original-price">Rs. 5000</span>
-                    <span class="discounted-price">Rs. 2500</span>
-                    <div class="timer">
-                        Limited Time Offer! Ends in <span id="pro-timer">23:59:59</span>
-                    </div>
+            <div class="packages-grid">
+                <div class="package-card free">
+                    <h3>Free Forever</h3>
+                    <p>Essential budgeting tools to get you started.</p>
+                    <ul class="feature-list">
+                        <li>Basic Budgeting</li>
+                        <li>Expense Tracking</li>
+                        <li>Goal Setting</li>
+                    </ul>
+                    <button class="package-select-btn">Get Started</button>
                 </div>
-                <p>Unlock advanced features and personalized insights.</p>
-                <ul class="feature-list">
-                    <li>Everything in Free</li>
-                    <li>AI-Powered Budgeting</li>
-                    <li>Income Tax Calculations</li>
-                    <li>Emergency Fund Planning</li>
-                    <li>Advanced Analytics</li>
-                </ul>
-                <button class="package-select-btn">Get Pro Now</button>
+
+                <div class="package-card pro">
+                    <h3>6FigFam Pro</h3>
+                    <div class="price">
+                        <span class="original-price">Rs. 5000</span>
+                        <span class="discounted-price">Rs. 2500</span>
+                        <div class="timer">
+                            Limited Time Offer! Ends in <span id="pro-timer">23:59:59</span>
+                        </div>
+                    </div>
+                    <p>Unlock advanced features and personalized insights.</p>
+                    <ul class="feature-list">
+                        <li>Everything in Free</li>
+                        <li>AI-Powered Budgeting</li>
+                        <li>Income Tax Calculations</li>
+                        <li>Emergency Fund Planning</li>
+                        <li>Advanced Analytics</li>
+                    </ul>
+                    <button class="package-select-btn">Get Pro Now</button>
+                </div>
+            </div>
+
+            <div class="feature-comparison">
+                <h3>Feature Comparison</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free</th>
+                            <th>Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Smart Budgeting</td>
+                            <td><span class="material-icons">check</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>AI Recommendations</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>Income Tax Calculation</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Fund Planning</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Analytics</td>
+                            <td><span class="material-icons">close</span></td>
+                            <td><span class="material-icons">check</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <div class="feature-comparison">
-            <h3>Feature Comparison</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Free</th>
-                        <th>Pro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Smart Budgeting</td>
-                        <td><span class="material-icons">check</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>AI Recommendations</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>Income Tax Calculation</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>Emergency Fund Planning</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>
-                    <tr>
-                        <td>Advanced Analytics</td>
-                        <td><span class="material-icons">close</span></td>
-                        <td><span class="material-icons">check</span></td>
-                    </tr>                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- 50/30/20 Budget Calculator Section (inputs only; calculation redirects to budget-result.html) -->
     <section id="fifty-thirty-twenty" class="fifty-thirty-twenty-section">
@@ -272,7 +272,7 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
 
             <div class="calculator-form">
                 <label for="monthly-income">Monthly Income (Rs.):</label>
-                <input type="number" id="monthly-income" placeholder="Enter your monthly income" required>
+                <input type="number" id="monthly-income" placeholder="Enter your monthly income" required />
                 <button id="calculate-btn">Calculate</button>
             </div>
         </div>
@@ -289,9 +289,7 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
                     <strong>This app will always be free to use.</strong> But if you'd like to support our mission, feel free to Fix My Feathers. Any amount helps!
                 </p>
 
-                <a href="https://coff.ee/6figfam" target="_blank" class="donate-button">
-                    Donate
-                </a>
+                <a href="https://coff.ee/6figfam" target="_blank" class="donate-button">Donate</a>
 
                 <div class="support-message">
                     Every contribution helps us keep improving and maintaining this free service for everyone.
@@ -299,7 +297,7 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
             </div>
 
             <div class="fix-my-feathers-image">
-                <img src="Images/fixmyfeatures.png" alt="Fix My Feathers Mascot">
+                <img src="Images/fixmyfeatures.png" alt="Fix My Feathers Mascot" />
             </div>
         </div>
     </section>
@@ -308,32 +306,460 @@ document.querySelector('.nav-toggle').addEventListener('click',function(){
         <div class="container">
             <div class="contact-header">
                 <h2>Get in Touch</h2>
-                <p>We'd love to hear from you! Whether you have a question, feedback, or just want to say hi — reach out anytime. Our team is here to help you make budgeting simple and stress-free.</p>
+                <p>
+                    We'd love to hear from you! Whether you have a question, feedback, or just want to say hi — reach out anytime. Our team is here to help you make budgeting simple and stress-free.
+                </p>
             </div>
 
             <div class="contact-content">
                 <div class="contact-info-section">
                     <h3>Contact Information</h3>
                     <div class="contact-methods">
+
                         <div class="contact-method">
                             <div class="contact-icon">
                                 <span class="material-icons">chat</span>
                             </div>
                             <div class="contact-details">
                                 <h4>WhatsApp</h4>
-                                <a href="https://wa.me/27723437825">+27 72 343 7825</a>
                                 <a href="https://wa.me/94723437825">+94 72 343 7825</a>
+                                <a href="https://wa.me/27723437825">+27 72 343 7825</a>
                             </div>
                         </div>
 
-@@ -331,7 +331,7 @@
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <span class="material-icons">phone</span>
                             </div>
                             <div class="contact-details">
                                 <h4>Telephone</h4>
-                                <a href="tel:+27113031234">+94 11 303 1234</a>
                                 <a href="tel:+94113031234">+94 11 303 1234</a>
+                                <a href="tel:+27113031234">+27 11 303 1234</a>
                             </div>
                         </div>
 
-@@ -812,3 +812,4 @@
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <span class="material-icons">email</span>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <a href="mailto:neshni2000@gmail.com">neshni2000@gmail.com</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h3>Send us a Message</h3>
+                    <form action="https://formspree.io/f/mblkwgrv" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="contactName">Name</label>
+                            <input type="text" id="contactName" name="name" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" name="_replyto" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactSubject">Subject</label>
+                            <input type="text" id="contactSubject" name="subject" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" name="message" rows="5" required></textarea>
+                        </div>
+
+                        <!-- Optional hidden redirect after sending -->
+                        <input type="hidden" name="_subject" value="New 6FigFam Contact Submission" />
+                        <input type="hidden" name="_next" value="thankyou.html" />
+
+                        <button type="submit" class="contact-submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-footer">
+                    <p><strong>Your thoughts matter. Let's build smarter budgets together!</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="Images/logo.png" alt="6FigFam Logo" />
+                        <div class="footer-logo-text">6FigFam</div>
+                    </div>
+                    <p class="footer-description">
+                        Wise budgeting and keen insights to help your family soar to six-figure success.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <span class="material-icons">facebook</span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <span class="material-icons">alternate_email</span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Phone">
+                            <span class="material-icons">phone</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#fix-my-feathers">Fix my Feathers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="#smart-budgeting">Smart Budgeting</a></li>
+                        <li><a href="#family-planning">Family Planning</a></li>
+                        <li><a href="#goal-tracking">Goal Tracking</a></li>
+                        <li><a href="#analytics">Analytics & Insights</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-info">
+                        <a href="https://wa.me/94723437825" class="contact-item" aria-label="WhatsApp +94 72 343 7825">
+                            <span class="material-icons">chat</span>
+                            <span>+94 72 343 7825</span>
+                        </a>
+                        <a href="tel:+94113031234" class="contact-item" aria-label="Phone +94 11 303 1234">
+                            <span class="material-icons">phone</span>
+                            <span>+94 11 303 1234</span>
+                        </a>
+                        <a href="mailto:neshni2000@gmail.com" class="contact-item" aria-label="Email neshni2000@gmail.com">
+                            <span class="material-icons">email</span>
+                            <span>neshni2000@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 6FigFam. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#privacy">Privacy Policy</a>
+                        <a href="#terms">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="close-btn" onclick="closeAuthModal()" aria-label="Close">&times;</button>
+                <h2>Welcome to 6FigFam</h2>
+                <p>Join our community of financial wisdom seekers</p>
+            </div>
+            <div class="auth-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('signin')">Sign In</button>
+                    <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+                </div>
+
+                <!-- Sign In Form -->
+                <div id="signinForm" class="auth-form active">
+                    <form onsubmit="handleSignIn(event)">
+                        <div class="form-group">
+                            <label for="signinEmail">Email</label>
+                            <input type="email" id="signinEmail" name="email" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword">Password</label>
+                            <input type="password" id="signinPassword" name="password" required />
+                        </div>
+                        <button type="submit" class="auth-button">Sign In</button>
+                    </form>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <button class="google-signin-btn" onclick="handleGoogleSignIn()">
+                        <svg class="google-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                            <path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                            <path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        </svg>
+                        Continue with Google
+                    </button>
+
+                    <div class="forgot-password">
+                        <a href="#" onclick="handleForgotPassword()">Forgot your password?</a>
+                    </div>
+                </div>
+
+                <!-- Sign Up Form -->
+                <div id="signupForm" class="auth-form">
+                    <form onsubmit="handleSignUp(event)">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" name="name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" name="email" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" name="password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required />
+                        </div>
+                        <button type="submit" class="auth-button">Create Account</button>
+                    </form>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <button class="google-signin-btn" onclick="handleGoogleSignUp()">
+                        <svg class="google-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                            <path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                            <path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        </svg>
+                        Sign up with Google
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Module Script -->
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyABnXX7RGTnX_TSmclfmqyfYCNc6DSxQi8",
+          authDomain: "figfam-3c952.firebaseapp.com",
+          projectId: "figfam-3c952",
+          storageBucket: "figfam-3c952.firebasestorage.app",
+          messagingSenderId: "875036927097",
+          appId: "1:875036927097:web:c7ee56d43a3192ec5360a8",
+          measurementId: "G-5M2C4Y71MS"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Sign Up
+        window.handleSignUp = async (event) => {
+          event.preventDefault();
+          const name = document.getElementById('signupName').value.trim();
+          const email = document.getElementById('signupEmail').value.trim();
+          const password = document.getElementById('signupPassword').value;
+          const confirmPassword = document.getElementById('confirmPassword').value;
+
+          if (password !== confirmPassword) {
+            alert("Passwords don't match!");
+            return;
+          }
+
+          try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            localStorage.setItem('userName', name);
+            window.location.href = "onboarding.html";
+          } catch (error) {
+            alert(error.message);
+          }
+        };
+
+        // Sign In
+        window.handleSignIn = async (event) => {
+          event.preventDefault();
+          const email = document.getElementById('signinEmail').value.trim();
+          const password = document.getElementById('signinPassword').value;
+
+          try {
+            await signInWithEmailAndPassword(auth, email, password);
+            const username = email.split('@');
+            localStorage.setItem('userName', username);
+            window.location.href = "onboarding.html";
+          } catch (error) {
+            alert(error.message);
+          }
+        };
+
+        // Google Sign-In
+        window.handleGoogleSignIn = async () => {
+          try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            const displayName = user.displayName || user.email.split('@');
+            localStorage.setItem('userName', displayName);
+            window.location.href = "onboarding.html";
+          } catch (error) {
+            alert(error.message);
+          }
+        };
+
+        // Sign Out
+        window.handleSignOut = async () => {
+          await signOut(auth);
+          showSuccessMessage("Signed out successfully!");
+        };
+
+        // Google Sign-Up uses the same function as sign-in with Google
+        window.handleGoogleSignUp = window.handleGoogleSignIn;
+    </script>
+
+    <!-- Main JavaScript -->
+    <script>
+        // Global variables
+        let currentUser = null;
+
+        // Modal functions
+        function openAuthModal(tab = 'signin') {
+            document.getElementById('authModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            if (tab === 'signup') {
+                switchTab('signup');
+            } else {
+                switchTab('signin');
+            }
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            // Remove active class from tabs and forms
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+
+            // Add active class to the selected tab and form
+            if (tab === 'signin' || tab === 'signup') {
+                document.querySelector(`.auth-tab:nth-child(${tab === 'signin' ? 1 : 2})`).classList.add('active');
+                document.getElementById(`${tab}Form`).classList.add('active');
+            }
+        }
+
+        // Handle forgot password
+        function handleForgotPassword() {
+            const email = prompt('Please enter your email address:');
+            if (email) {
+                alert('Password reset instructions have been sent to your email.');
+                // Implement actual password reset logic with Firebase if needed
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #10B981;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+                z-index: 3000;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 600;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            successDiv.textContent = message;
+            document.body.appendChild(successDiv);
+
+            setTimeout(() => {
+                successDiv.remove();
+            }, 5000);
+        }
+
+        // Animations and intersection observers
+        document.addEventListener('DOMContentLoaded', function () {
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe animated elements
+            document.querySelectorAll('.feature-card, .about-content h2, .about-content p').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Parallax for floating elements
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.floating-element');
+
+                parallaxElements.forEach((el, idx) => {
+                    const speed = 0.5 + (idx * 0.1);
+                    el.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+                });
+            });
+
+            // Close modal on outside click
+            const authModal = document.getElementById('authModal');
+            authModal.addEventListener('click', (e) => {
+                if (e.target === authModal) {
+                    closeAuthModal();
+                }
+            });
+
+            // Add slideInRight animation style
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from {
+                        opacity: 0;
+                        transform: translateX(300px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
 </html>
