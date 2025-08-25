@@ -15,26 +15,50 @@
         /* Owl Image Styling */
         .floating-owl {
             position: absolute;
-            right: 20px;
-            top: 50%;
+            right: 20px; /* Position on the right */
+            top: 50%;    /* Vertically center */
+            /* The initial transform to center the owl vertically */
             transform: translateY(-50%);
-            width: 150px;
-            animation: float-animation 3s ease-in-out infinite;
+            width: 200px; /* Increased size for better visibility */
+            /* Changed animation name, duration, and timing function for bounce effect */
+            animation: bounce-animation 2s ease-in-out infinite;
         }
 
-        @keyframes float-animation {
+        /* Bounce Animation */
+        @keyframes bounce-animation {
             0%, 100% {
-                transform: translateY(-50%) translateY(10px);
+                /* At the resting position */
+                transform: translateY(-50%) translateY(0);
             }
             50% {
+                /* Bouncing down */
+                transform: translateY(-50%) translateY(25px); /* Adjust this value for bounce height */
+            }
+            75% {
+                /* Slight rebound or overshoot */
                 transform: translateY(-50%) translateY(-10px);
             }
         }
 
         /* Budget Section Styling */
         .budget-result-section {
-            position: relative;
+            position: relative; /* Needed for absolute positioning of owl */
             padding: 40px 20px;
+            /* Ensure there's enough space for the owl if it's large */
+            min-height: 400px; /* Example minimum height, adjust as needed */
+        }
+
+        /* Responsive adjustments for the owl */
+        @media (max-width: 768px) {
+            .floating-owl {
+                width: 150px; /* Smaller on smaller screens */
+                right: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .floating-owl {
+                display: none; /* Hide owl on very small screens if it obstructs */
+            }
         }
     </style>
 </head>
@@ -77,6 +101,7 @@
             </div>
 
             <!-- Owl Image -->
+            <!-- Ensure owl3.png is in the Images folder -->
             <img src="Images/owl3.png" alt="Owl Mascot" class="floating-owl">
         </div>
     </section>
@@ -100,8 +125,9 @@
                     labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
                     datasets: [{
                         data: [needs, wants, savings],
-                        backgroundColor: ['#9B59B6', '#8E44AD', '#7D3C98'], // Shades of purple
-                        hoverBackgroundColor: ['#9B59B6', '#8E44AD', '#7D3C98']
+                        /* Selected three matching purple shades from the image */
+                        backgroundColor: ['#B65FCF', '#9867C5', '#6F4685'], // Lilac, Iris, Affair
+                        hoverBackgroundColor: ['#B65FCF', '#9867C5', '#6F4685']
                     }]
                 },
                 options: {
