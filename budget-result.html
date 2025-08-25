@@ -11,6 +11,32 @@
     <link rel="stylesheet" href="Styles/base.css">
     <link rel="stylesheet" href="Styles/animations.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Owl Image Styling */
+        .floating-owl {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            animation: float-animation 3s ease-in-out infinite;
+        }
+
+        @keyframes float-animation {
+            0%, 100% {
+                transform: translateY(-50%) translateY(10px);
+            }
+            50% {
+                transform: translateY(-50%) translateY(-10px);
+            }
+        }
+
+        /* Budget Section Styling */
+        .budget-result-section {
+            position: relative;
+            padding: 40px 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="animated-bg">
@@ -49,6 +75,9 @@
                 <img src="Images/qrcode.png" alt="QR Code for App Download" class="qr-code">
                 <a href="your-app-download-link" class="download-btn">Download Now</a>
             </div>
+
+            <!-- Owl Image -->
+            <img src="Images/owl3.png" alt="Owl Mascot" class="floating-owl">
         </div>
     </section>
 
@@ -71,8 +100,8 @@
                     labels: ['Needs (50%)', 'Wants (30%)', 'Savings/Investing (20%)'],
                     datasets: [{
                         data: [needs, wants, savings],
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                        backgroundColor: ['#9B59B6', '#8E44AD', '#7D3C98'], // Shades of purple
+                        hoverBackgroundColor: ['#9B59B6', '#8E44AD', '#7D3C98']
                     }]
                 },
                 options: {
