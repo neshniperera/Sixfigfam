@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/png" href="Images/owl1.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Images/owl1.png">
     <title>Get Started with 6FigFam</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="Styles/onboarding.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styles/onboarding.css"> <!-- Linked to the external CSS file -->
 </head>
 <body>
     <div class="animated-bg">
@@ -21,7 +21,7 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="Images/logo.png" alt="6FigFam Logo"/>
+                    <img src="Images/logo.png" alt="6FigFam Logo">
                     <div class="logo-text">6FigFam</div>
                 </div>
                 <div class="nav-container">
@@ -69,11 +69,12 @@
                             </div>
                         </div>
                         <div class="step-image">
-                            <img src="Images/owl2.png" alt="Financial Clarity Owl"/>
+                            <img src="Images/owl2.png" alt="Financial Clarity Owl">
                         </div>
                     </div>
                     <button class="next-btn" onclick="nextStep()">Next <span class="material-icons">arrow_forward</span></button>
                 </div>
+             
 
                 <!-- Step 2 -->
                 <div class="step-slide" id="step2">
@@ -88,7 +89,7 @@
                             </div>
                         </div>
                         <div class="step-image">
-                            <img src="Images/owl3.png" alt="Debt Freedom"/>
+                            <img src="Images/owl3.png" alt="Debt Freedom">
                         </div>
                     </div>
                     <div class="step-buttons">
@@ -110,7 +111,7 @@
                             </div>
                         </div>
                         <div class="step-image">
-                            <img src="Images/owl6.png" alt="Emergency Fund"/>
+                            <img src="Images/owl6.png" alt="Emergency Fund">
                         </div>
                     </div>
                     <div class="step-buttons">
@@ -132,7 +133,7 @@
                             </div>
                         </div>
                         <div class="step-image">
-                            <img src="Images/owl4.png" alt="Financial Goals"/>
+                            <img src="Images/owl4.png" alt="Financial Goals">
                         </div>
                     </div>
                     <div class="step-buttons">
@@ -154,11 +155,12 @@
                             </div>
                         </div>
                         <div class="step-image">
-                            <img src="Images/owl5.png" alt="Generational Wealth"/>
+                            <img src="Images/owl5.png" alt="Generational Wealth">
                         </div>
                     </div>
                     <div class="step-buttons">
                         <button class="prev-btn" onclick="prevStep()"><span class="material-icons">arrow_back</span> Previous</button>
+                        <!-- Updated button to use the common downloadApp function -->
                         <button class="download-btn" onclick="downloadApp()">
                             <span class="material-icons">download</span>
                             Download 6FigFam App
@@ -169,15 +171,15 @@
 
             <div class="download-section">
                 <div class="owl-mascot">
-                    <img src="Images/owl1.png" alt="6FigFam Owl Mascot"/>
+                    <img src="Images/owl1.png" alt="6FigFam Owl Mascot">
                 </div>
                 <div class="download-prompt">
                     <h3>Ready to take control of your financial future?</h3>
                     <p>Download the 6FigFam app and start your journey to six-figure confidence today!</p>
-
-                    <!-- QR and button container -->
+                    
+                    <!-- NEW CONTAINER FOR QR AND BUTTON -->
                     <div class="download-qr-button-container">
-                        <img src="Images/qr-code.png" alt="QR Code for App Download" class="download-qr-code"/>
+                        <img src="Images/qr-code.png" alt="QR Code for App Download" class="download-qr-code">
                         <button class="download-btn-large" onclick="downloadApp()">
                             <span class="material-icons">download</span>
                             Download 6FigFam App (APK)
@@ -217,24 +219,107 @@
     </footer>
 
     <script>
-        // Drive folder to open
-        const DRIVE_DOWNLOAD_URL = "https://drive.google.com/drive/folders/1ZcmeRvWE1DyTlMSTesOx1Wuzmja0_N08?usp=drive_link";
-
-        // Populate username from localStorage or URL
+        // Get username from localStorage or URL parameter
         document.addEventListener('DOMContentLoaded', function() {
+            // Try to get username from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const userName = urlParams.get('name') || localStorage.getItem('userName') || 'Friend';
+            
+            // Display username
             document.querySelector('.user-name').textContent = userName;
+            
+            // Store in localStorage for future use
             localStorage.setItem('userName', userName);
-
-            // Dot click handlers (safe setup after DOM load)
-            document.querySelectorAll('.dot').forEach(dot => {
-                dot.addEventListener('click', function() {
-                    showStep(parseInt(this.getAttribute('data-step')));
-                });
-            });
         });
 
         // Step navigation
         let currentStep = 1;
-   
+        const totalSteps = 5;
+
+        function updateProgress() {
+            // Update progress bar
+            const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.querySelector('.progress-filled').style.width = `${progressPercentage}%`;
+            
+            // Update dots
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.classList.remove('active');
+                if (parseInt(dot.getAttribute('data-step')) <= currentStep) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.step-slide').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Show current step
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            
+            // Update progress
+            currentStep = stepNumber;
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                showStep(currentStep + 1);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        // Updated downloadApp function to redirect to Google Drive
+        function downloadApp() {
+            // Display a temporary success/redirect message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'download-message';
+            successDiv.innerHTML = `
+                <div class="download-message-content">
+                    <span class="material-icons">check_circle</span>
+                    <div class="download-message-text">
+                        <h4>Redirecting to Download!</h4>
+                        <p>You will be redirected to Google Drive to download the app.</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(successDiv);
+            
+            // Remove the message after a few seconds
+            setTimeout(() => {
+                successDiv.classList.add('fade-out'); // Add fade-out animation
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 500); // Remove after animation
+            }, 5000); // Display message for 5 seconds
+
+            // Redirect to the specified Google Drive link in a new tab
+            const googleDriveUrl = "https://drive.google.com/drive/folders/1ZcmeRvWE1DyTlMSTesOx1Wuzmja0_N08?usp=drive_link";
+            window.open(googleDriveUrl, '_blank'); // Open in a new tab
+        }
+
+        // Handle sign out
+        function handleSignOut() {
+            // Clear any stored user data
+            localStorage.removeItem('userName');
+            
+            // Redirect to home page
+            window.location.href = "index.html";
+        }
+
+        // Click on dots to navigate
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                showStep(parseInt(this.getAttribute('data-step')));
+            });
+        });
+    </script>
+</body>
+</html>
