@@ -407,8 +407,10 @@ header {
 }
 
 .rating-showcase-section {
-  background: linear-gradient(90deg, #6854f8 0%, #a583e6 100%);
-  padding: 48px 0 48px 0;
+  /* Soft light purple like About section */
+  background: linear-gradient(135deg, #e5dcfa 20%, #f5edff 100%);
+  padding: 54px 0 54px 0;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -416,73 +418,66 @@ header {
 
 .rating-showcase-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 40px;
-  max-width: 800px;
-  margin: 0 auto;
+  justify-content: flex-start;
+  padding: 28px 38px;
   background: #fff;
   border-radius: 32px;
-  box-shadow: 0 6px 32px rgba(104,84,248,0.07);
-  padding: 32px 36px;
+  box-shadow: 0 8px 24px rgba(104,84,248,0.08);
+  max-width: 520px;
+  width: 95%;
+  margin: 0 auto;
+  gap: 28px;
 }
 
 .rating-logo img {
-  width: 85px;
-  height: 85px;
+  width: 63px;
+  height: 63px;
   background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 0 18px rgba(104,84,248,0.11);
-  padding: 8px;
-}
-
-.rating-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0 0 18px rgba(104,84,248,0.05);
+  padding: 5px;
 }
 
 .rating-content h2.orbitron {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   color: #6854f8;
   font-weight: 700;
-  margin-bottom: 10px;
-  letter-spacing: 0.02em;
+  margin-bottom: 7px;
+  letter-spacing: -1px;
 }
 
 .rating-content .subtitle.quicksand {
   font-family: 'Quicksand', sans-serif;
-  font-size: 1.06rem;
-  color: #555;
-  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #3c306c;
+  margin-bottom: 10px;
 }
 
 .stars-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .rating-score.orbitron {
   font-family: 'Orbitron', sans-serif;
-  font-size: 2.1rem;
+  font-size: 1.7rem;
   color: #FFD600;
   font-weight: 700;
-  margin-right: 6px;
+  margin-right: 3px;
 }
 
 .stars-row .star {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #FFD600;
   vertical-align: middle;
-  margin-right: 1px;
 }
 
 .rating-count.quicksand {
   font-family: 'Quicksand', sans-serif;
-  font-size: 1rem;
-  color: #777;
-  margin-left: 16px;
+  font-size: 0.92rem;
+  color: #7c68a8;
+  margin-left: 13px;
 }
