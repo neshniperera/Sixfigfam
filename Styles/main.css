@@ -406,3 +406,83 @@ header {
     background: var(--secondary-color);
 }
 
+.rating-showcase-section {
+  background: linear-gradient(90deg, #6854f8 0%, #a583e6 100%);
+  padding: 48px 0 48px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating-showcase-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 6px 32px rgba(104,84,248,0.07);
+  padding: 32px 36px;
+}
+
+.rating-logo img {
+  width: 85px;
+  height: 85px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 0 18px rgba(104,84,248,0.11);
+  padding: 8px;
+}
+
+.rating-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rating-content h2.orbitron {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.7rem;
+  color: #6854f8;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.rating-content .subtitle.quicksand {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.06rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.stars-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating-score.orbitron {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.1rem;
+  color: #FFD600;
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.stars-row .star {
+  font-size: 2rem;
+  color: #FFD600;
+  vertical-align: middle;
+  margin-right: 1px;
+}
+
+.rating-count.quicksand {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: #777;
+  margin-left: 16px;
+}
