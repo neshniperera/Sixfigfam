@@ -406,38 +406,22 @@ header {
     background: var(--secondary-color);
 }
 
-.rating-purple-section {
+.rating-simple-section {
+  /* Matches the section color where you marked in red */
   background: linear-gradient(135deg, #ecd9f8 0%, #d8c3f7 100%);
-  padding: 56px 0;
+  padding: 60px 0 45px 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.rating-inner-box {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  background: #fff;
-  border-radius: 30px;
-  box-shadow: 0px 6px 36px rgba(73, 43, 115, 0.10);
-  padding: 34px 44px;
-  max-width: 540px;
-  width: 100%;
-}
-
-.rating-logo img {
-  width: 60px;
-  height: 60px;
-  background: #f1ebfa;
-  border-radius: 15px;
-  box-shadow: 0 0 16px rgba(123, 85, 173,0.06);
-  padding: 5px;
+.rating-content {
+  text-align: center;
 }
 
 .rating-content h2.orbitron {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.37rem;
   color: #6f42c1;
   font-weight: 700;
   margin-bottom: 10px;
@@ -448,14 +432,15 @@ header {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.97rem;
   color: #69488c;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
 
 .stars-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 3px;
-  flex-wrap: wrap;
+  margin-bottom: 7px;
 }
 
 .rating-score.orbitron {
@@ -468,15 +453,15 @@ header {
 
 .stars-row .star {
   font-size: 1.45rem;
-  color: #a259cf;      /* Main purple shade for stars */
+  color: #a259cf;      /* Your main purple brand shade */
   vertical-align: middle;
-  /* or use: color: #6f42c1; for deep purple */
 }
 
 .rating-count.quicksand {
+  display: block;
   font-family: 'Quicksand', sans-serif;
   font-size: 0.92rem;
   color: #8563b8;
-  margin-left: 13px;
+  margin-top: 1px;
 }
 
